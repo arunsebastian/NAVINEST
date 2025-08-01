@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "navinest",
+    "slug": "navinest",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -36,7 +36,7 @@
       ]
     ],
     "experiments": {
-      "typedRoutes": true
+		"typedRoutes": true
     }
   }
 }
