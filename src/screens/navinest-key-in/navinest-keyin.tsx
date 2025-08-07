@@ -1,12 +1,12 @@
 import { Text, View } from "react-native";
 import { styles } from "./styles";
 
-export const PropertyKeyIn = () => {
+export const  NavinestKeyIn = () => {
   return (
     <View
       style={styles.container}
     >
-      <Text>Property Key In</Text>
+      <Text>Navinest KEY IN</Text>
     </View>
   );
 }
