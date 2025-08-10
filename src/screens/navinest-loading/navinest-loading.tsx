@@ -1,12 +1,10 @@
-import { ThemedFooter } from "@/components/ThemedFooter";
-import { ThemedHeader } from "@/components/ThemedHeader";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-//import Screens from '@/constants/screens';
+import { ThemedActivityIndicator, ThemedFooter, ThemedHeader, ThemedText, ThemedView } from "@/components";
+
+import Screens from '@/constants/screens';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Image } from "react-native";
+import { Image } from "react-native";
 
 import logoImg from '@assets/images/logo.png';
 
@@ -19,7 +17,7 @@ export const  NavinestLoading = () => {
 			const navigateToKeyIn = async () => {
 			window.setTimeout(()=>{
 				setLoading(false)
-				//navigation.navigate(Screens.navinestKeyIn)
+				navigation.navigate(Screens.navinestKeyIn)
 			},2000)
 		};
 		navigateToKeyIn();
@@ -34,7 +32,7 @@ export const  NavinestLoading = () => {
 		<ThemedHeader/>
 		<ThemedView>
 			<Image  source={logoImg} />
-			<ActivityIndicator size={50} color="#F97E25" animating={loading}/>
+			<ThemedActivityIndicator size={50}  animating={loading}/>
 		</ThemedView>
 		<ThemedFooter>
 			<ThemedText type="subtitle">Powered By Navinest</ThemedText>
