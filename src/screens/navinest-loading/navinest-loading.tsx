@@ -1,20 +1,22 @@
-import { Text, View } from "react-native";
+import { Text, View,ActivityIndicator } from "react-native";
 import { styles } from "./styles";
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect } from 'react';
+import { useEffect ,useState} from 'react';
+import Screens  from "@/constants/screens";
 
 
 export const  NavinestLoading = () => {
   	const navigation =  useNavigation<NativeStackNavigationProp<any>>();
-	
+	const [loading,setLoading] = useState<boolean>(true);
+
 	useEffect(() => {
 		const unsubscribe = navigation.addListener('focus', () => {
-			console.log('MyScreen is focused!');
 			const navigateToKeyIn = async () => {
-				window.setTimeout(()=>{
-				navigation.navigate('NavinestKeyIn')
-			},100)
+			window.setTimeout(()=>{
+				setLoading(false)
+				navigation.navigate(Screens.navinestKeyIn)
+			},1000)
 		};
 		navigateToKeyIn();
 	});
@@ -24,10 +26,9 @@ export const  NavinestLoading = () => {
 	}, [navigation]);
 
   return (
-    <View
-      style={styles.container}
-    >
-      <Text>NavinestLoading..</Text>
+    <View style={styles.container}>
+		<ActivityIndicator size={50} color="blue" animating={loading}/>
+      	<Text>NavinestLoading..</Text>
     </View>
   );
 }
