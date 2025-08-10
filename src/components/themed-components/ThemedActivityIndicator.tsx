@@ -3,16 +3,22 @@ import { ActivityIndicator, StyleSheet, type ActivityIndicatorProps } from 'reac
 
 export type ThemedActivityIndicatorProps = ActivityIndicatorProps & {
     mode?: string;
+    size?:number
 };
 
 
 
 const styles = StyleSheet.create({
-    indicator:{}
+    indicator:{
+        position:'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
+    }
 })
 
-export const ThemedActivityIndicator= ({  style, mode='default', ...otherProps  }: ThemedActivityIndicatorProps) =>{
+export const ThemedActivityIndicator= ({  style, mode='default',size=50, ...otherProps  }: ThemedActivityIndicatorProps) =>{
   const color = useThemeColor({context:'activityIndicator',mode:mode});
-  return <ActivityIndicator color={ color} style={[styles.indicator,style]} {...otherProps} />;
+  return <ActivityIndicator size={size} color={ color} style={[styles.indicator,style]} {...otherProps} />;
 }
 
