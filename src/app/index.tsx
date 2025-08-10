@@ -1,13 +1,13 @@
-import {NavigationIndependentTree,NavigationContainer,} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { NavinestLoading } from '@/screens/navinest-loading';
-import { NavinestKeyIn } from '@/screens/navinest-key-in';
-import { NavinestHome } from '@/screens/navinest-home';
 import Screens from '@/constants/screens';
+import { NavinestHome } from '@/screens/navinest-home';
+import { NavinestKeyIn } from '@/screens/navinest-key-in';
+import { NavinestLoading } from '@/screens/navinest-loading';
+import { NavigationContainer, NavigationIndependentTree, } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-export default  () => {
+const RootElement = () => {
 	return (
       <NavigationIndependentTree>
 		<NavigationContainer>
@@ -32,3 +32,4 @@ export default  () => {
      </NavigationIndependentTree>
   );
 };
+export default  RootElement

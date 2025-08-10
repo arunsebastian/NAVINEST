@@ -1,10 +1,14 @@
-import { Text, View,ActivityIndicator } from "react-native";
-import { styles } from "./styles";
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { ThemedFooter } from "@/components/ThemedFooter";
+import { ThemedHeader } from "@/components/ThemedHeader";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+//import Screens from '@/constants/screens';
 import { useNavigation } from '@react-navigation/native';
-import { useEffect ,useState} from 'react';
-import Screens  from "@/constants/screens";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, Image } from "react-native";
 
+import logoImg from '@assets/images/logo.png';
 
 export const  NavinestLoading = () => {
   	const navigation =  useNavigation<NativeStackNavigationProp<any>>();
@@ -15,8 +19,8 @@ export const  NavinestLoading = () => {
 			const navigateToKeyIn = async () => {
 			window.setTimeout(()=>{
 				setLoading(false)
-				navigation.navigate(Screens.navinestKeyIn)
-			},1000)
+				//navigation.navigate(Screens.navinestKeyIn)
+			},2000)
 		};
 		navigateToKeyIn();
 	});
@@ -26,9 +30,15 @@ export const  NavinestLoading = () => {
 	}, [navigation]);
 
   return (
-    <View style={styles.container}>
-		<ActivityIndicator size={50} color="blue" animating={loading}/>
-      	<Text>NavinestLoading..</Text>
-    </View>
+    <ThemedView>
+		<ThemedHeader/>
+		<ThemedView>
+			<Image  source={logoImg} />
+			<ActivityIndicator size={50} color="#F97E25" animating={loading}/>
+		</ThemedView>
+		<ThemedFooter>
+			<ThemedText type="subtitle">Powered By Navinest</ThemedText>
+		</ThemedFooter>
+    </ThemedView>
   );
 }
