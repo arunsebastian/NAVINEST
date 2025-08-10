@@ -13,13 +13,14 @@ import { Image } from 'react-native';
 
 import logoImg from '@assets/images/logo.png';
 
-export const NavinestLoading = () => {
+export const NavinestLoading = (props: any) => {
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
     const [busy, setBusy] = useState<boolean>(true);
     const [resourcesLoaded, setResourcesLoaded] = useState<boolean>(true);
 
     useEffect(() => {
         if (navigation && resourcesLoaded) {
+            console.log(props);
             const unsubscribe = navigation.addListener('focus', () => {
                 const navigateToKeyIn = async () => {
                     window.setTimeout(() => {
@@ -32,7 +33,14 @@ export const NavinestLoading = () => {
             //Clean up the event listener when the component unmounts
             return unsubscribe;
         }
-    }, [resourcesLoaded]);
+    }, [resourcesLoaded, props]);
+
+    // I AM HERE BELOW
+    // I dont think we need the below code seperately - try and integrate on to the effect above with a time out
+
+    useEffect(() => {
+        console.log(props.route.params);
+    }, [props.route.params]);
 
     return (
         <ThemedView>
