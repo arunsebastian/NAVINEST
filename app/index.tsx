@@ -1,8 +1,7 @@
 import Screens from '@/constants/screens';
-import { NavinestHome } from '@/screens/navinest-home';
 import { NavinestKeyIn } from '@/screens/navinest-key-in';
 import { NavinestLoading } from '@/screens/navinest-loading';
-import { validateAppKey } from '@/utils/app-validation';
+
 import {
     NavigationContainer,
     NavigationIndependentTree
@@ -10,7 +9,6 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,29 +18,8 @@ const Stack = createNativeStackNavigator();
  */
 const RootElement = () => {
     const { id } = useLocalSearchParams();
-    const [appValidated, setAppValidated] = useState<boolean>(false);
 
-    useEffect(() => {
-        (async () => {
-            const result = await validateAppKey(String(id));
-            setAppValidated(result.success);
-        })();
-    }, [id]);
-
-    return appValidated ? (
-        <NavigationIndependentTree>
-            <NavigationContainer>
-                <Stack.Navigator>
-                    <Stack.Screen
-                        name={Screens.navinestHome}
-                        component={NavinestHome}
-                        initialParams={{ id: id }}
-                        options={{ headerShown: false }}
-                    />
-                </Stack.Navigator>
-            </NavigationContainer>
-        </NavigationIndependentTree>
-    ) : (
+    return (
         <NavigationIndependentTree>
             <NavigationContainer>
                 <Stack.Navigator>
@@ -63,5 +40,4 @@ const RootElement = () => {
         </NavigationIndependentTree>
     );
 };
-
 export default RootElement;

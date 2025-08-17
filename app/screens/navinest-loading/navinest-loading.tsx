@@ -5,10 +5,12 @@ import {
     ThemedText,
     ThemedView
 } from '@/components/themed';
+import Screens from '@/constants/screens';
+import { validateAppKey } from '@/utils/app-validation';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useEffect, useState } from 'react';
 
-import { useState } from 'react';
 import { Image, TextInput } from 'react-native';
 import styles from './styles';
 
@@ -18,53 +20,42 @@ type LoadStatus = {
     success: boolean;
 };
 
-// {
-//     props: {
-//         route: {
-//             params: { id = 'maithreyan' }
-//         }
-//     }
-// }: any
+type NullableBoolean = boolean | null;
 
 export const NavinestLoading = ({
     route: {
-        params: { id = 'maithreyan' }
+        params: { id }
     }
 }: any) => {
     const hasFocus = useIsFocused();
-
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
     const [busy, setBusy] = useState<boolean>(true);
+    const [keyValidated, setKeyValidated] = useState<NullableBoolean>(null);
     const [loadStaus, setLoadStatus] = useState<LoadStatus>({
         success: false
     });
-    console.log('I am here');
 
-    // useEffect(() => {
-    //     if (navigation && loadStaus.success) {
-    //         if (!hasFocus) {
-    //             const unsubscribe = navigation.addListener('focus', () => {
-    //                 const navigateToKeyIn = async () => {
-    //                     window.setTimeout(() => {
-    //                         setBusy(false);
-    //                         //navigation.navigate(Screens.navinestKeyIn);
-    //                     }, 1000);
-    //                 };
-    //                 navigateToKeyIn();
-    //             });
-    //             //Clean up the event listener when the component unmounts
-    //             return unsubscribe;
-    //         } else {
-    //             window.setTimeout(() => {
-    //                 setBusy(false);
-    //                 //navigation.navigate(Screens.navinestKeyIn);
-    //             }, 1000);
-    //         }
-    //     }
-    // }, [navigation, loadStaus.success]);
-    // useEffect(() => {
-    //     console.log('NavinestLoading: props', id);
-    // }, [id]);
+    useEffect(() => {
+        if (hasFocus) {
+            (async () => {
+                const result = await validateAppKey(String(id));
+                setKeyValidated(result.success);
+            })();
+        }
+    }, [id, hasFocus]);
+
+    useEffect(() => {
+        if (
+            typeof keyValidated == 'boolean' &&
+            keyValidated &&
+            loadStaus.success
+        ) {
+            navigation.navigate(Screens.navinestKeyIn);
+            setBusy(false);
+        } else if (typeof keyValidated == 'boolean' && loadStaus.success) {
+            setBusy(false);
+        }
+    }, [keyValidated, loadStaus.success]);
 
     return (
         <ThemedView>
@@ -73,15 +64,17 @@ export const NavinestLoading = ({
                 <Image
                     source={logoImg}
                     onLoadEnd={() => {
-                        setLoadStatus({ success: true });
+                        !loadStaus.success &&
+                            setLoadStatus({ success: !loadStaus.success });
                     }}
                 />
-                <TextInput
-                    style={styles.keyIn}
-                    // onChangeText={onChangeNumber}
-                    // value={number}
-                    placeholder='Enter your Navinest Key'
-                />
+                {typeof keyValidated == 'boolean' && !keyValidated && (
+                    <TextInput
+                        style={styles.keyIn}
+                        placeholder='Enter your Navinest Key'
+                    />
+                )}
+
                 <ThemedActivityIndicator animating={busy} />
             </ThemedView>
             <ThemedFooter>
