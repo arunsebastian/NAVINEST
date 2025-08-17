@@ -8,11 +8,16 @@ import {
     NavigationIndependentTree
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 
 const Stack = createNativeStackNavigator();
 
+/**
+ * Root element for the application.
+ * This component checks if the app key is valid and renders the appropriate screen.
+ */
 const RootElement = () => {
     const { id } = useLocalSearchParams();
     const [appValidated, setAppValidated] = useState<boolean>(false);
@@ -58,4 +63,5 @@ const RootElement = () => {
         </NavigationIndependentTree>
     );
 };
+
 export default RootElement;
