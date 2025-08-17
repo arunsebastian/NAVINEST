@@ -8,7 +8,7 @@ import {
 import Screens from '@/constants/screens';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useLocalSearchParams } from 'expo-router';
+
 import { useEffect, useState } from 'react';
 import { Image } from 'react-native';
 
@@ -19,7 +19,6 @@ type LoadStatus = {
 };
 
 export const NavinestLoading = () => {
-    const { id } = useLocalSearchParams();
     const hasFocus = useIsFocused();
 
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -43,8 +42,10 @@ export const NavinestLoading = () => {
                 //Clean up the event listener when the component unmounts
                 return unsubscribe;
             } else {
-                setBusy(false);
-                navigation.navigate(Screens.navinestKeyIn);
+                window.setTimeout(() => {
+                    setBusy(false);
+                    navigation.navigate(Screens.navinestKeyIn);
+                }, 1000);
             }
         }
     }, [navigation, loadStaus.success, hasFocus]);

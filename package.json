@@ -1,14 +1,17 @@
 {
     "name": "navinest",
     "main": "expo-router/entry",
+    "type": "module",
     "version": "1.0.0",
     "scripts": {
-        "start": "expo start --web",
+        "start": "concurrently \"npm run start:server\" \"npx expo start --web\"",
+        "start:server": "node server/index.js",
         "reset-project": "node ./scripts/reset-project.js",
-        "android": "expo start --android",
-        "ios": "expo start --ios",
-        "web": "expo start --web",
-        "lint": "expo lint"
+        "web": "npx expo start --web",
+        "web-build": "npx expo export -p web --output-dir web-build",
+        "lint": "npx expo lint",
+        "android": "npx expo start --android",
+        "ios": "npx expo start --ios"
     },
     "dependencies": {
         "@expo/vector-icons": "^14.1.0",
@@ -30,6 +33,7 @@
         "expo-symbols": "~0.4.5",
         "expo-system-ui": "~5.0.10",
         "expo-web-browser": "~14.2.0",
+        "express": "^5.1.0",
         "react": "19.0.0",
         "react-dom": "19.0.0",
         "react-native": "0.79.5",
@@ -42,7 +46,9 @@
     },
     "devDependencies": {
         "@babel/core": "^7.25.2",
+        "@types/express": "^5.0.3",
         "@types/react": "~19.0.10",
+        "concurrently": "^9.2.0",
         "eslint": "^9.25.0",
         "eslint-config-expo": "~9.2.0",
         "typescript": "~5.8.3"

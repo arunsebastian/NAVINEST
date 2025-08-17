@@ -1,0 +1,15 @@
+{
+    "id": "ABCD",
+    "address": "123 Main St, Springfield, USA",
+    "owner": "John Doe",
+    "propertyType": "Residential",
+    "size": "1500 sqft",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "yearBuilt": 2005,
+    "features": ["Garage", "Garden", "Swimming Pool"],
+    "price": "$300,000",
+    "status": "For Sale",
+    "images": ["image1.jpg", "image2.jpg", "image3.jpg"],
+    "description": "Beautiful family home located in a quiet neighborhood with modern amenities."
+}
