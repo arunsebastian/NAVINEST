@@ -6,47 +6,48 @@ import {
     ThemedView
 } from '@/components';
 import Screens from '@/constants/screens';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Image } from 'react-native';
 
 import logoImg from '@assets/images/logo.png';
 
-type LoadtStatus = {
+type LoadStatus = {
     success: boolean;
 };
 
-export const NavinestLoading = (props: any) => {
+export const NavinestLoading = () => {
+    const { id } = useLocalSearchParams();
+    const hasFocus = useIsFocused();
+
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
     const [busy, setBusy] = useState<boolean>(true);
-    const [loadStaus, setLoadStatus] = useState<LoadtStatus>({
+    const [loadStaus, setLoadStatus] = useState<LoadStatus>({
         success: false
     });
 
     useEffect(() => {
         if (navigation && loadStaus.success) {
-            console.log(props);
-            const unsubscribe = navigation.addListener('focus', () => {
-                const navigateToKeyIn = async () => {
-                    window.setTimeout(() => {
-                        setBusy(false);
-                        navigation.navigate(Screens.navinestKeyIn);
-                    }, 1000);
-                };
-                navigateToKeyIn();
-            });
-            //Clean up the event listener when the component unmounts
-            return unsubscribe;
+            if (!hasFocus) {
+                const unsubscribe = navigation.addListener('focus', () => {
+                    const navigateToKeyIn = async () => {
+                        window.setTimeout(() => {
+                            setBusy(false);
+                            navigation.navigate(Screens.navinestKeyIn);
+                        }, 1000);
+                    };
+                    navigateToKeyIn();
+                });
+                //Clean up the event listener when the component unmounts
+                return unsubscribe;
+            } else {
+                setBusy(false);
+                navigation.navigate(Screens.navinestKeyIn);
+            }
         }
-    }, [navigation, loadStaus.success]);
-
-    // I AM HERE BELOW
-    // I dont think we need the below code seperately - try and integrate on to the effect above with a time out
-
-    useEffect(() => {
-        console.log(props.route.params);
-    }, [props.route.params]);
+    }, [navigation, loadStaus.success, hasFocus]);
 
     return (
         <ThemedView>

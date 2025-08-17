@@ -7,12 +7,10 @@ import {
     NavigationIndependentTree
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useLocalSearchParams } from 'expo-router';
 
 const Stack = createNativeStackNavigator();
 
 const RootElement = () => {
-    const { id } = useLocalSearchParams();
     return (
         <NavigationIndependentTree>
             <NavigationContainer>
@@ -20,19 +18,19 @@ const RootElement = () => {
                     <Stack.Screen
                         name={Screens.navinestLoding}
                         component={NavinestLoading}
-                        initialParams={{ id: id }}
+                        // initialParams={{ id: id }}
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen
                         name={Screens.navinestKeyIn}
                         component={NavinestKeyIn}
-                        initialParams={{ id: id }}
+                        // initialParams={{ id: id }}
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen
                         name={Screens.navinestHome}
                         component={NavinestHome}
-                        initialParams={{ id: id }}
+                        // initialParams={{ id: id }}
                         options={{ headerShown: false }}
                     />
                 </Stack.Navigator>
