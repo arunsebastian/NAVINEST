@@ -1,8 +1,10 @@
 import {
     ThemedActivityIndicator,
+    ThemedButton,
     ThemedFooter,
     ThemedHeader,
     ThemedText,
+    ThemedTextInput,
     ThemedView
 } from '@/components/themed';
 import Screens from '@/constants/screens';
@@ -11,8 +13,7 @@ import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
 
-import { Image, TextInput } from 'react-native';
-import styles from './styles';
+import { Image } from 'react-native';
 
 import logoImg from '@assets/images/logo.png';
 
@@ -57,6 +58,14 @@ export const NavinestLoading = ({
         }
     }, [keyValidated, loadStaus.success]);
 
+    const authenticateAndProceed = async () => {
+        // I AM HERE TO VALIDATE THE APP KEY
+        setBusy(true);
+        const result = await validateAppKey(String(id));
+        setKeyValidated(result.success);
+        setBusy(false);
+    };
+
     return (
         <ThemedView>
             <ThemedHeader />
@@ -69,10 +78,13 @@ export const NavinestLoading = ({
                     }}
                 />
                 {typeof keyValidated == 'boolean' && !keyValidated && (
-                    <TextInput
-                        style={styles.keyIn}
-                        placeholder='Enter your Navinest Key'
-                    />
+                    <div style={{ display: 'flex' }}>
+                        <ThemedTextInput placeholder='Enter your Navinest Key' />
+                        <ThemedButton
+                            label='Go'
+                            onPress={authenticateAndProceed}
+                        />
+                    </div>
                 )}
 
                 <ThemedActivityIndicator animating={busy} />
