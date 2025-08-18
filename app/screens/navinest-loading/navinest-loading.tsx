@@ -10,6 +10,7 @@ import {
 import Screens from '@/constants/screens';
 import { validateAppKey } from '@/utils/app-validation';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
+//import { Linking } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
 
@@ -31,6 +32,7 @@ export const NavinestLoading = ({
     const hasFocus = useIsFocused();
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
     const [busy, setBusy] = useState<boolean>(true);
+    const [inputKey, setInputKey] = useState<string>('');
     const [keyValidated, setKeyValidated] = useState<NullableBoolean>(null);
     const [loadStaus, setLoadStatus] = useState<LoadStatus>({
         success: false
@@ -59,11 +61,32 @@ export const NavinestLoading = ({
     }, [keyValidated, loadStaus.success]);
 
     const authenticateAndProceed = async () => {
-        // I AM HERE TO VALIDATE THE APP KEY
         setBusy(true);
-        const result = await validateAppKey(String(id));
+        const result = await validateAppKey(String(inputKey));
+
         setKeyValidated(result.success);
         setBusy(false);
+        if (result.success) {
+            navigation.replace(Screens.navinestKeyIn, { id: inputKey });
+        } else {
+            // Handle invalid key case
+            console.error('Invalid Navinest Key');
+        }
+
+        // I AM HERE
+        //  - to investigate which is the best way to navigate further
+        // - is it by repolacing the screen or redirecting to  a new one - I am inclined to use replace
+        // but then again the user may need to go back to the loading screen
+        // - so I might use redirect with url with the key
+
+        // const url = `https://navinest.com/key/${inputKey}`;
+        // const supported = await Linking.canOpenURL(url);
+
+        // if (supported) {
+        //     await Linking.openURL(url);
+        // } else {
+        //     console.log(`Don't know how to open this URL: ${url}`);
+        // }
     };
 
     return (
@@ -79,7 +102,11 @@ export const NavinestLoading = ({
                 />
                 {typeof keyValidated == 'boolean' && !keyValidated && (
                     <div style={{ display: 'flex' }}>
-                        <ThemedTextInput placeholder='Enter your Navinest Key' />
+                        <ThemedTextInput
+                            placeholder='Enter your Navinest Key'
+                            value={inputKey}
+                            onChangeText={(key) => setInputKey(key)}
+                        />
                         <ThemedButton
                             label='Go'
                             onPress={authenticateAndProceed}
