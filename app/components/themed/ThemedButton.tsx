@@ -19,20 +19,25 @@ export type ThemedButtonProps = PressableProps & {
     };
 };
 
-const componentStyle = StyleSheet.create({
-    buttonContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 40,
-        borderRadius: 5,
-        padding: 15,
-        backgroundColor: 'red'
-    },
-    buttonText: {
-        fontSize: 15,
-        userSelect: 'none'
-    }
-});
+const createComponentStyles = ({ disabled }: any) => {
+    // Define styles for the button container and text
+    // The styles will change based on the disabled state
+    return StyleSheet.create({
+        buttonContainer: {
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 40,
+            borderRadius: 5,
+            padding: 15,
+            backgroundColor: 'red',
+            opacity: disabled ? 0.5 : 1
+        },
+        buttonText: {
+            fontSize: 15,
+            userSelect: 'none'
+        }
+    });
+};
 
 export const ThemedButton = ({
     style = {
@@ -44,6 +49,7 @@ export const ThemedButton = ({
     ...otherProps
 }: ThemedButtonProps) => {
     const backgroundColorRef = new Animated.Value(0);
+    // Get the text colors based on the theme mode
     const backgroundColorDefault = useThemeColor({
         context: 'buttonBackgroundDefault',
         mode: mode
@@ -83,6 +89,9 @@ export const ThemedButton = ({
             otherProps.onPress();
         }
     };
+
+    const styles = createComponentStyles(otherProps);
+
     return (
         <Pressable
             {...otherProps}
@@ -92,14 +101,14 @@ export const ThemedButton = ({
         >
             <Animated.View
                 style={[
-                    componentStyle.buttonContainer,
+                    styles.buttonContainer,
                     { backgroundColor },
                     style.containerStyles
                 ]}
             >
                 <Text
                     style={[
-                        { ...componentStyle.buttonText },
+                        { ...styles.buttonText },
                         { color: color },
                         { ...style.textStyles }
                     ]}

@@ -7,12 +7,16 @@ import {
     ThemedTextInput,
     ThemedView
 } from '@/components/themed';
+import AppConfig from '@/constants/config';
 import Screens from '@/constants/screens';
+import Strings from '@/strings';
+
 import { validateAppKey } from '@/utils/app-validation';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-//import { Linking } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
+import { StyleSheet } from 'react-native';
 
 import { Image } from 'react-native';
 
@@ -23,6 +27,16 @@ type LoadStatus = {
 };
 
 type NullableBoolean = boolean | null;
+
+const styles = StyleSheet.create({
+    keyInContianer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10,
+        gap: 10
+    }
+});
 
 export const NavinestLoading = ({
     route: {
@@ -67,26 +81,13 @@ export const NavinestLoading = ({
         setKeyValidated(result.success);
         setBusy(false);
         if (result.success) {
+            // Navigate to the key-in screen with the validated key
+            router.replace(`/?id=${inputKey}`);
             navigation.replace(Screens.navinestKeyIn, { id: inputKey });
         } else {
             // Handle invalid key case
-            console.error('Invalid Navinest Key');
+            console.error(Strings.invalidKey);
         }
-
-        // I AM HERE
-        //  - to investigate which is the best way to navigate further
-        // - is it by repolacing the screen or redirecting to  a new one - I am inclined to use replace
-        // but then again the user may need to go back to the loading screen
-        // - so I might use redirect with url with the key
-
-        // const url = `https://navinest.com/key/${inputKey}`;
-        // const supported = await Linking.canOpenURL(url);
-
-        // if (supported) {
-        //     await Linking.openURL(url);
-        // } else {
-        //     console.log(`Don't know how to open this URL: ${url}`);
-        // }
     };
 
     return (
@@ -101,14 +102,19 @@ export const NavinestLoading = ({
                     }}
                 />
                 {typeof keyValidated == 'boolean' && !keyValidated && (
-                    <div style={{ display: 'flex' }}>
+                    <div style={styles.keyInContianer}>
                         <ThemedTextInput
-                            placeholder='Enter your Navinest Key'
+                            placeholder={Strings.enterKey}
                             value={inputKey}
                             onChangeText={(key) => setInputKey(key)}
+                            onSubmitEditing={authenticateAndProceed}
                         />
                         <ThemedButton
-                            label='Go'
+                            disabled={
+                                String(inputKey).length <
+                                AppConfig.minKeyCodeLength
+                            }
+                            label={Strings.go}
                             onPress={authenticateAndProceed}
                         />
                     </div>
@@ -117,7 +123,7 @@ export const NavinestLoading = ({
                 <ThemedActivityIndicator animating={busy} />
             </ThemedView>
             <ThemedFooter>
-                <ThemedText type='subtitle'>Powered By Navinest</ThemedText>
+                <ThemedText type='subtitle'>{Strings.poweredBy}</ThemedText>
             </ThemedFooter>
         </ThemedView>
     );
