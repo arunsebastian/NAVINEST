@@ -86,7 +86,7 @@ export const NavinestLoading = ({
             navigation.replace(Screens.navinestKeyIn, { id: inputKey });
         } else {
             // Handle invalid key case
-            console.error(Strings.invalidKey);
+            console.error(Strings.invalidPropertyKey);
         }
     };
 
@@ -104,7 +104,7 @@ export const NavinestLoading = ({
                 {typeof keyValidated == 'boolean' && !keyValidated && (
                     <div style={styles.keyInContianer}>
                         <ThemedTextInput
-                            placeholder={Strings.enterKey}
+                            placeholder={Strings.enterPropertyKey}
                             value={inputKey}
                             onChangeText={(key) => setInputKey(key)}
                             onSubmitEditing={authenticateAndProceed}
