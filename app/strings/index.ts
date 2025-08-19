@@ -1,6 +1,6 @@
 export default {
     poweredBy: 'Powered by Navinest',
-    enterPropertyKey: 'Enter your Property Key',
-    invalidPropertyKey: 'Invalid Property Key',
+    enterPropertyKey: 'Enter your property key',
+    invalidPropertyKey: 'Invalid property key',
     go: 'Go'
 };

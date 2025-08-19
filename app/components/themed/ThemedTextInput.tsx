@@ -5,6 +5,7 @@ import { TextInput } from 'react-native';
 
 export type ThemedTextInputProps = TextInputProps & {
     mode?: string;
+    ref?: React.Ref<typeof TextInput>;
 };
 
 const styles = StyleSheet.create({
@@ -18,6 +19,7 @@ const styles = StyleSheet.create({
 
 export const ThemedTextInput = ({
     style,
+    ref,
     mode = 'default',
     ...otherProps
 }: ThemedTextInputProps) => {
@@ -28,6 +30,7 @@ export const ThemedTextInput = ({
 
     return (
         <TextInput
+            ref={ref as any}
             style={[{ borderColor }, styles.textInput, style]}
             {...otherProps}
         />

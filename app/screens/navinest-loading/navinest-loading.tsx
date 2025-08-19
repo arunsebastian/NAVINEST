@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 10,
         gap: 10
+    },
+    errorText: {
+        marginTop: 5
     }
 });
 
@@ -45,9 +48,11 @@ export const NavinestLoading = ({
 }: any) => {
     const hasFocus = useIsFocused();
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
-    const [busy, setBusy] = useState<boolean>(true);
+    const [busy, setBusy] = useState<boolean>(false);
     const [inputKey, setInputKey] = useState<string>('');
     const [keyValidated, setKeyValidated] = useState<NullableBoolean>(null);
+    const [showKeyValidationError, setShowKeyValidationError] =
+        useState<boolean>(false);
     const [loadStaus, setLoadStatus] = useState<LoadStatus>({
         success: false
     });
@@ -55,8 +60,12 @@ export const NavinestLoading = ({
     useEffect(() => {
         if (hasFocus) {
             (async () => {
+                setBusy(true);
                 const result = await validateAppKey(String(id));
+                setInputKey(id ? String(id) : '');
                 setKeyValidated(result.success);
+                setShowKeyValidationError(!result.success);
+                setBusy(false);
             })();
         }
     }, [id, hasFocus]);
@@ -67,7 +76,7 @@ export const NavinestLoading = ({
             keyValidated &&
             loadStaus.success
         ) {
-            navigation.navigate(Screens.navinestKeyIn);
+            navigation.navigate(Screens.navinestKeyIn, { id: inputKey });
             setBusy(false);
         } else if (typeof keyValidated == 'boolean' && loadStaus.success) {
             setBusy(false);
@@ -77,7 +86,7 @@ export const NavinestLoading = ({
     const authenticateAndProceed = async () => {
         setBusy(true);
         const result = await validateAppKey(String(inputKey));
-
+        setShowKeyValidationError(!result.success);
         setKeyValidated(result.success);
         setBusy(false);
         if (result.success) {
@@ -88,6 +97,17 @@ export const NavinestLoading = ({
             // Handle invalid key case
             console.error(Strings.invalidPropertyKey);
         }
+    };
+
+    const handleKeyInputChange = (key: string) => {
+        setInputKey(key);
+        if (showKeyValidationError) {
+            setShowKeyValidationError(false);
+        }
+    };
+
+    const hasAuthFailed = () => {
+        return typeof keyValidated == 'boolean' && !keyValidated;
     };
 
     return (
@@ -101,23 +121,30 @@ export const NavinestLoading = ({
                             setLoadStatus({ success: !loadStaus.success });
                     }}
                 />
-                {typeof keyValidated == 'boolean' && !keyValidated && (
-                    <div style={styles.keyInContianer}>
-                        <ThemedTextInput
-                            placeholder={Strings.enterPropertyKey}
-                            value={inputKey}
-                            onChangeText={(key) => setInputKey(key)}
-                            onSubmitEditing={authenticateAndProceed}
-                        />
-                        <ThemedButton
-                            disabled={
-                                String(inputKey).length <
-                                AppConfig.minKeyCodeLength
-                            }
-                            label={Strings.go}
-                            onPress={authenticateAndProceed}
-                        />
-                    </div>
+                {hasAuthFailed() && (
+                    <>
+                        <div style={styles.keyInContianer}>
+                            <ThemedTextInput
+                                placeholder={Strings.enterPropertyKey}
+                                value={inputKey}
+                                onChangeText={handleKeyInputChange}
+                                onSubmitEditing={authenticateAndProceed}
+                            />
+                            <ThemedButton
+                                disabled={
+                                    String(inputKey).length <
+                                    AppConfig.minKeyCodeLength
+                                }
+                                label={Strings.go}
+                                onPress={authenticateAndProceed}
+                            />
+                        </div>
+                        {showKeyValidationError && (
+                            <ThemedText type='error' style={styles.errorText}>
+                                {Strings.invalidPropertyKey}
+                            </ThemedText>
+                        )}
+                    </>
                 )}
 
                 <ThemedActivityIndicator animating={busy} />
