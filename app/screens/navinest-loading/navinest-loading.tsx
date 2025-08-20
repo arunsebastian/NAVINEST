@@ -64,7 +64,9 @@ export const NavinestLoading = ({
                 const result = await validateAppKey(String(id));
                 setInputKey(id ? String(id) : '');
                 setKeyValidated(result.success);
-                setShowKeyValidationError(!result.success);
+                if(id && id.length){
+                    setShowKeyValidationError(!result.success);
+                }
                 setBusy(false);
             })();
         }
