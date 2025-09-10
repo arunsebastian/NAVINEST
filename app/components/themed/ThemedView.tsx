@@ -1,5 +1,5 @@
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { StyleSheet, View, type ViewProps } from 'react-native';
+import { StyleSheet, SafeAreaView, type ViewProps } from 'react-native';
 
 export type ThemedViewProps = ViewProps & {
     mode?: string;
@@ -22,6 +22,6 @@ const styles = StyleSheet.create({
 export const ThemedView = ({  style, mode='default', ...otherProps  }: ThemedViewProps) =>{
   const backgroundColor = useThemeColor({context:'appBackground'});
 
-  return <View style={[{ backgroundColor },styles.view, style]} {...otherProps} />;
+  return <SafeAreaView style={[{ backgroundColor },styles.view, style]} {...otherProps} />;
 }
 

@@ -1,0 +1,17 @@
+{
+    "barcode":"http://localhost:3000/data/xyz/images/barcode.png",
+    "property":{
+        "id": "xyz",
+        "address": "27 Ede Road, Collingwood Park,QLD - 4301",
+        "owner": "Arun Sebastian",
+        "propertyType": "Residential",
+        "size": "1500 sqft",
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "yearBuilt": 2005,
+        "features": ["Garage", "Garden", "Swimming Pool"],
+        "price": "$300,000",
+        "status": "For Sale",
+        "description": "Beautiful family home located in a quiet neighborhood with modern amenities."
+    }
+}

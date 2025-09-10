@@ -1,8 +1,8 @@
 import AppConfig
  from "@/constants/config";
+ 
 export const validateAppKey = async (
-    key: string,
-    options?: RequestInit
+    key: string
 ): Promise<Record<string, boolean>> => {
     // a temporary timer to enforce a bit delay
     const timer =  new Promise(
@@ -31,8 +31,7 @@ export const validateAppKey = async (
 };
 
 export const getPropertyData = async (
-    key: string,
-    options?: RequestInit
+    key: string
 ): Promise<any> => {
     if(key){
         const url = `${AppConfig.propertyDataPath}/${key}`;

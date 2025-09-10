@@ -78,7 +78,7 @@ export const NavinestKeyIn = ({
             keyValidated &&
             loadStaus.success
         ) {
-            navigation.navigate(Screens.navinestWelcome, { id: inputKey });
+            navigation.navigate(Screens.navinestWelcome.key, { id: inputKey });
             setBusy(false);
         } else if (typeof keyValidated == 'boolean' && loadStaus.success) {
             setBusy(false);
@@ -94,7 +94,7 @@ export const NavinestKeyIn = ({
         if (result.success) {
             // Navigate to the key-in screen with the validated key
             router.replace(`/?id=${inputKey}`);
-            navigation.replace(Screens.navinestWelcome, { id: inputKey });
+            navigation.replace(Screens.navinestWelcome.key, { id: inputKey });
         } else {
             // Handle invalid key case
             console.error(Strings.invalidPropertyKey);

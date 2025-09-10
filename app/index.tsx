@@ -24,16 +24,16 @@ const RootElement = () => {
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen
-                        name={Screens.navinestKeyIn}
+                        name={Screens.navinestKeyIn.key}
                         component={NavinestKeyIn}
                         initialParams={{ id: id }}
-                        options={{ headerShown: false }}
+                        options={{ headerShown: false,title:Screens.navinestKeyIn.title }}
                     />
                     <Stack.Screen
-                        name={Screens.navinestWelcome}
+                        name={Screens.navinestWelcome.key}
                         component={NavinestWelcome}
                         initialParams={{ id: id }}
-                        options={{ headerShown: false }}
+                        options={{ headerShown: false,title:Screens.navinestWelcome.title }}
                     />
                 </Stack.Navigator>
             </NavigationContainer>
