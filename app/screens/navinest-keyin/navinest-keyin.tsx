@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export const NavinestLoading = ({
+export const NavinestKeyIn = ({
     route: {
         params: { id }
     }
@@ -78,7 +78,7 @@ export const NavinestLoading = ({
             keyValidated &&
             loadStaus.success
         ) {
-            navigation.navigate(Screens.navinestKeyIn, { id: inputKey });
+            navigation.navigate(Screens.navinestWelcome, { id: inputKey });
             setBusy(false);
         } else if (typeof keyValidated == 'boolean' && loadStaus.success) {
             setBusy(false);
@@ -94,7 +94,7 @@ export const NavinestLoading = ({
         if (result.success) {
             // Navigate to the key-in screen with the validated key
             router.replace(`/?id=${inputKey}`);
-            navigation.replace(Screens.navinestKeyIn, { id: inputKey });
+            navigation.replace(Screens.navinestWelcome, { id: inputKey });
         } else {
             // Handle invalid key case
             console.error(Strings.invalidPropertyKey);

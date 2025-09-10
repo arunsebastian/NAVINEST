@@ -31,9 +31,36 @@ app.use((req, res, next) => {
 });
 
 
+// Example: GET /data/property_id/images/'<image>.png/jpeg' will serve the images
+app.use('/data/:filename/images/:image', (req, res) => {
+    const folder = req.params.filename;
+    const imagename = req.params.image;
+    const imagePath = path.join(
+        __dirname,
+        '..',
+        'data',
+        folder,
+        'images',
+        imagename
+    );
+   
+    // Send the file
+    res.sendFile(imagePath, (err) => {
+        if (err) {
+            console.error('Error serving image:', err);
+            if (err.code === 'ENOENT') {
+                res.status(404).send('Image not found.');
+            } else {
+                res.status(500).send('Internal server error.');
+            }
+        }
+    });
+});
+
+
 // Example: GET /data/sample.json will serve ./data/sample.json from project root
 app.get('/data/:filename', (req, res) => {
-    const folder = req.params.filename.replace(/\.json$/, ''); // Remove .json extension for security
+    const folder = req.params.filename.replace(/\.json$/, '');
     const filePath = path.join(
         __dirname,
         '..',

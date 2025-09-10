@@ -1,6 +1,6 @@
 const  Screens = {
-    navinestLoding:'NavinestLoading',
     navinestKeyIn:'NavinestKeyIn',
+    navinestWelcome:'NavinestWelcome',
     navinestHome:'NavinestHome'
 }
 export default Screens

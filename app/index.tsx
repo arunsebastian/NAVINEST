@@ -1,6 +1,6 @@
 import Screens from '@/constants/screens';
-import { NavinestKeyIn } from '@/screens/navinest-key-in';
-import { NavinestLoading } from '@/screens/navinest-loading';
+import { NavinestWelcome } from '@/screens/navinest-welcome';
+import { NavinestKeyIn } from '@/screens/navinest-keyin';
 
 import {
     NavigationContainer,
@@ -24,14 +24,14 @@ const RootElement = () => {
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen
-                        name={Screens.navinestLoding}
-                        component={NavinestLoading}
+                        name={Screens.navinestKeyIn}
+                        component={NavinestKeyIn}
                         initialParams={{ id: id }}
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen
-                        name={Screens.navinestKeyIn}
-                        component={NavinestKeyIn}
+                        name={Screens.navinestWelcome}
+                        component={NavinestWelcome}
                         initialParams={{ id: id }}
                         options={{ headerShown: false }}
                     />
