@@ -32,8 +32,8 @@ app.use((req, res, next) => {
 
 
 // Example: GET /data/property_id/images/'<image>.png/jpeg' will serve the images
-app.use('/data/:filename/images/:image', (req, res) => {
-    const folder = req.params.filename;
+app.use('/data/:property_id/images/:image', (req, res) => {
+    const folder = req.params.property_id;
     const imagename = req.params.image;
     const imagePath = path.join(
         __dirname,
@@ -58,15 +58,16 @@ app.use('/data/:filename/images/:image', (req, res) => {
 });
 
 
-// Example: GET /data/sample.json will serve ./data/sample.json from project root
-app.get('/data/:filename', (req, res) => {
-    const folder = req.params.filename.replace(/\.json$/, '');
+// Example: GET /data/:property_id 
+
+app.get('/data/:property_id', (req, res) => {
+    const folder = req.params.property_id;
     const filePath = path.join(
         __dirname,
         '..',
         'data',
         folder,
-        `${folder}.json`
+        'manifest.json'
     );
     console.log(filePath);
 
