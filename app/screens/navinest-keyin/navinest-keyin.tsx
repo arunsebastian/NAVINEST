@@ -46,7 +46,17 @@ export const NavinestKeyIn = ({
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
     const [busy, setBusy] = useState<boolean>(false);
     const [inputKey, setInputKey] = useState<string>('');
+
+    ///////// ::::IMPORTANT
+
+    // TODO:::
+    // validation of property key and fetching property data has to be at one go and subsequently passed
+    //  on to welcome screen so that screen does not have to fetch it again
+
     const [keyValidated, setKeyValidated] = useState<NullableBoolean>(null);
+
+    ///////////////////////////////////////////////////////////////////
+
     const [showKeyValidationError, setShowKeyValidationError] =
         useState<boolean>(false);
     const [loadStaus, setLoadStatus] = useState<any>({
