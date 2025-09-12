@@ -1,5 +1,5 @@
 const AppConfig = {
-    minKeyCodeLength: 4,
-    propertyDataPath:'http://localhost:3000/data'
+    minKeyCodeLength: 3,
+    propertyDataPath: 'http://localhost:3000/data'
 };
 export default AppConfig;

@@ -61,10 +61,10 @@ export const NavinestKeyIn = ({
         if (hasFocus) {
             (async () => {
                 setBusy(true);
-                const result = await validateAppKey(String(id));
-                setInputKey(id ? String(id) : '');
+                const result = await validateAppKey(id);
+                setInputKey(id ? id : '');
                 setKeyValidated(result.success);
-                if(id && id.length){
+                if (id && id.length) {
                     setShowKeyValidationError(!result.success);
                 }
                 setBusy(false);

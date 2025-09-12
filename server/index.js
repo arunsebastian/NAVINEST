@@ -10,16 +10,21 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = 3000;
 
-
 // Custom CORS middleware
 
 app.use((req, res, next) => {
     // Allow requests from localhost:3000
     res.setHeader('Access-Control-Allow-Origin', '*');
     // Allow specific HTTP methods
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PUT, DELETE, OPTIONS'
+    );
     // Allow specific headers
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Authorization'
+    );
     // Allow credentials (cookies, HTTP authentication) to be sent with the request
     res.setHeader('Access-Control-Allow-Credentials', true);
 
@@ -30,7 +35,6 @@ app.use((req, res, next) => {
 
     next();
 });
-
 
 // Example: GET /data/<property_id>/images/<image.png/jpeg> will serve the images
 
@@ -45,7 +49,7 @@ app.get('/data/:property_id/images/:image', (req, res) => {
         'images',
         imagename
     );
-   
+
     // Send the file
     res.sendFile(imagePath, (err) => {
         if (err) {
@@ -59,8 +63,7 @@ app.get('/data/:property_id/images/:image', (req, res) => {
     });
 });
 
-
-// Example: GET /data/<property_id> 
+// Example: GET /data/<property_id>
 
 app.get('/data/:property_id', (req, res) => {
     const folder = req.params.property_id;
@@ -71,8 +74,6 @@ app.get('/data/:property_id', (req, res) => {
         folder,
         'manifest.json'
     );
-    console.log(filePath);
-
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             res.status(404).json({ error: 'File not found' });
@@ -81,8 +82,6 @@ app.get('/data/:property_id', (req, res) => {
         }
     });
 });
-
-
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
