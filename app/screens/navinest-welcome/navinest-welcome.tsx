@@ -44,54 +44,35 @@ export const NavinestWelcome = ({
         }
     }, [id, hasFocus]);
 
-    // useEffect(() => {
-    //     if (
-    //         typeof keyValidated == 'boolean' &&
-    //         keyValidated &&
-    //         loadStaus.success
-    //     ) {
-    //         navigation.navigate(Screens.navinestKeyIn, { id: inputKey });
-    //         setBusy(false);
-    //     } else if (typeof keyValidated == 'boolean' && loadStaus.success) {
-    //         setBusy(false);
-    //     }
-    // }, [keyValidated, loadStaus.success]);
-
     // I AM HERE
-    //::: 1. Make this below tsx more readable and styled :::
-    //::: 2. Start schema building and ui for home page::
+    //::: Start schema building and ui for home page::
 
     return (
         <ThemedView>
             <ThemedHeader />
-            <ThemedView>
-                {propertyData ? (
-                    <>
-                        <div>
-                            <Image
-                                source={{ uri: propertyData?.barcode }}
-                                style={styles.barcode}
-                                onLoadEnd={() => {
-                                    // !loadStaus.success &&
-                                    //     setLoadStatus({ success: !loadStaus.success });
-                                }}
-                            />
-                        </div>
-                        <VerticalSpacer />
-                        <ThemedText type='subtitle'>Welcome To</ThemedText>
-                        <VerticalSpacer />
-                        <ThemedText type='title'>
-                            {propertyData?.property?.address}
-                        </ThemedText>
-                        <VerticalSpacer />
-                        <ThemedText type='subtitle'>
-                            Hosted by {propertyData?.property?.owner}
-                        </ThemedText>
-                    </>
-                ) : null}
 
-                <ThemedActivityIndicator animating={busy} />
-            </ThemedView>
+            {propertyData && (
+                <ThemedView>
+                    <div>
+                        <Image
+                            source={{ uri: propertyData?.barcode }}
+                            style={styles.barcode}
+                            resizeMode='contain'
+                        />
+                    </div>
+                    <VerticalSpacer />
+                    <ThemedText type='subtitle'>Welcome To</ThemedText>
+                    <VerticalSpacer />
+                    <ThemedText type='title'>
+                        {propertyData?.property?.address}
+                    </ThemedText>
+                    <VerticalSpacer />
+                    <ThemedText type='subtitle'>
+                        Hosted by {propertyData?.property?.owner}
+                    </ThemedText>
+                </ThemedView>
+            )}
+            <ThemedActivityIndicator animating={busy} />
             <ThemedFooter>
                 <ThemedText type='subtitle'>{Strings.poweredBy}</ThemedText>
             </ThemedFooter>

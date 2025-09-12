@@ -22,10 +22,6 @@ import { Image } from 'react-native';
 
 import logoImg from '@assets/images/logo.png';
 
-type LoadStatus = {
-    success: boolean;
-};
-
 type NullableBoolean = boolean | null;
 
 const styles = StyleSheet.create({
@@ -53,7 +49,7 @@ export const NavinestKeyIn = ({
     const [keyValidated, setKeyValidated] = useState<NullableBoolean>(null);
     const [showKeyValidationError, setShowKeyValidationError] =
         useState<boolean>(false);
-    const [loadStaus, setLoadStatus] = useState<LoadStatus>({
+    const [loadStaus, setLoadStatus] = useState<any>({
         success: false
     });
 
