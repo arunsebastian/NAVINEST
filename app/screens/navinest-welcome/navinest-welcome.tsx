@@ -60,7 +60,7 @@ export const NavinestWelcome = ({
             <ThemedHeader />
             {propertyData && (
                 <ThemedView>
-                    <div>
+                    <div title={Strings.scanQRCode}>
                         <Image
                             source={{ uri: propertyData?.barcode }}
                             style={styles.barcode}
