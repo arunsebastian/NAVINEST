@@ -1,6 +1,6 @@
 {
-    "barcode":"http://localhost:3000/data/abcd/images/barcode.png",
-    "property":{
+    "barcode": "http://localhost:3000/data/abcd/images/barcode.png",
+    "property": {
         "id": "ABCD",
         "address": "123 Main St, Springfield, USA",
         "owner": "John Doe",

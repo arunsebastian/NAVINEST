@@ -5,6 +5,7 @@ import { Image, StyleSheet } from 'react-native';
 
 import {
     ThemedActivityIndicator,
+    ThemedButton,
     ThemedFooter,
     ThemedHeader,
     ThemedText,
@@ -12,9 +13,8 @@ import {
 } from '@/components/themed';
 
 import { VerticalSpacer } from '@/components/ui';
-
+import Screens from '@/constants/screens';
 import Strings from '@/strings';
-
 import { getPropertyData } from '@/utils/app-validation';
 
 const styles = StyleSheet.create({
@@ -44,6 +44,13 @@ export const NavinestWelcome = ({
         }
     }, [id, hasFocus]);
 
+    const proceedToHome = async () => {
+        navigation.replace(Screens.navinestHome.key, {
+            id: id,
+            data: propertyData
+        });
+    };
+
     // I AM HERE
     //::: Start schema building and ui for home page::
 
@@ -68,8 +75,13 @@ export const NavinestWelcome = ({
                     </ThemedText>
                     <VerticalSpacer />
                     <ThemedText type='subtitle'>
-                        Hosted by {propertyData?.property?.owner}
+                        {`${Strings.hostedBy} ${propertyData?.property?.owner}`}
                     </ThemedText>
+                    <VerticalSpacer />
+                    <ThemedButton
+                        label={Strings.home}
+                        onPress={proceedToHome}
+                    />
                 </ThemedView>
             )}
             <ThemedActivityIndicator animating={busy} />

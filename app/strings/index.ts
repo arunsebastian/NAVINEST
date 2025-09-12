@@ -3,5 +3,7 @@ export default {
     enterPropertyKey: 'Enter your property key',
     invalidPropertyKey: 'Invalid property key',
     go: 'Go',
-    scanQRCode: 'Scan QR Code'
+    hostedBy: 'Hosted by',
+    scanQRCode: 'Scan QR Code',
+    home: 'Home'
 };
