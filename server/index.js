@@ -12,6 +12,7 @@ const PORT = 3000;
 
 
 // Custom CORS middleware
+
 app.use((req, res, next) => {
     // Allow requests from localhost:3000
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -31,7 +32,8 @@ app.use((req, res, next) => {
 });
 
 
-// Example: GET /data/<property_id>/images/'<image.png/jpeg>' will serve the images
+// Example: GET /data/<property_id>/images/<image.png/jpeg> will serve the images
+
 app.get('/data/:property_id/images/:image', (req, res) => {
     const folder = req.params.property_id;
     const imagename = req.params.image;
@@ -59,6 +61,7 @@ app.get('/data/:property_id/images/:image', (req, res) => {
 
 
 // Example: GET /data/<property_id> 
+
 app.get('/data/:property_id', (req, res) => {
     const folder = req.params.property_id;
     const filePath = path.join(
