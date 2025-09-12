@@ -58,7 +58,6 @@ export const NavinestWelcome = ({
     return (
         <ThemedView>
             <ThemedHeader />
-
             {propertyData && (
                 <ThemedView>
                     <div>
