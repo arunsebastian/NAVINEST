@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     barcode: {
         width: 150,
         height: 150
-    }
+    },
+    homeBtnContainer: { marginTop: 20 }
 });
 
 export const NavinestWelcome = ({
@@ -77,8 +78,8 @@ export const NavinestWelcome = ({
                     <ThemedText type='subtitle'>
                         {`${Strings.hostedBy} ${propertyData?.property?.owner}`}
                     </ThemedText>
-                    <VerticalSpacer />
                     <ThemedButton
+                        style={{ containerStyles: styles.homeBtnContainer }}
                         label={Strings.home}
                         onPress={proceedToHome}
                     />
