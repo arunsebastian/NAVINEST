@@ -1,9 +1,7 @@
-import { router } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
-import { Image } from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useEffect, useState } from 'react';
+import { Image, StyleSheet } from 'react-native';
 
 import {
     ThemedActivityIndicator,
@@ -12,21 +10,19 @@ import {
     ThemedText,
     ThemedView
 } from '@/components/themed';
-import Screens from '@/constants/screens';
+
+import { VerticalSpacer } from '@/components/ui';
+
 import Strings from '@/strings';
 
 import { getPropertyData } from '@/utils/app-validation';
 
 const styles = StyleSheet.create({
-    welcome: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 10,
-        gap: 10
+    barcode: {
+        width: 150,
+        height: 150
     }
 });
-
 
 export const NavinestWelcome = ({
     route: {
@@ -35,7 +31,7 @@ export const NavinestWelcome = ({
 }: any) => {
     const hasFocus = useIsFocused();
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
-    const [propertyData,setPropertyData] = useState<Record<string,any>>();
+    const [propertyData, setPropertyData] = useState<Record<string, any>>();
     const [busy, setBusy] = useState<boolean>(false);
 
     useEffect(() => {
@@ -61,39 +57,38 @@ export const NavinestWelcome = ({
     //     }
     // }, [keyValidated, loadStaus.success]);
 
-
-
     // I AM HERE
     //::: 1. Make this below tsx more readable and styled :::
     //::: 2. Start schema building and ui for home page::
-    
 
     return (
         <ThemedView>
             <ThemedHeader />
             <ThemedView>
-         
-               
-                {propertyData?
-                (<>
-                   <Image
-                        source={{uri:propertyData?.barcode}}
-                        style={{
-                            width: 200,
-                            height: 200,
-                        }}
-                        // onLoadEnd={() => {
-                        //     !loadStaus.success &&
-                        //         setLoadStatus({ success: !loadStaus.success });
-                        // }}
-                    />
-                    <ThemedText type='title'>
-                        {propertyData?.property?.address}
-                    </ThemedText>
-                    <ThemedText type='subtitle'>
-                        Hosted by {propertyData?.property?.owner}
-                    </ThemedText></>):null
-                }
+                {propertyData ? (
+                    <>
+                        <div>
+                            <Image
+                                source={{ uri: propertyData?.barcode }}
+                                style={styles.barcode}
+                                onLoadEnd={() => {
+                                    // !loadStaus.success &&
+                                    //     setLoadStatus({ success: !loadStaus.success });
+                                }}
+                            />
+                        </div>
+                        <VerticalSpacer />
+                        <ThemedText type='subtitle'>Welcome To</ThemedText>
+                        <VerticalSpacer />
+                        <ThemedText type='title'>
+                            {propertyData?.property?.address}
+                        </ThemedText>
+                        <VerticalSpacer />
+                        <ThemedText type='subtitle'>
+                            Hosted by {propertyData?.property?.owner}
+                        </ThemedText>
+                    </>
+                ) : null}
 
                 <ThemedActivityIndicator animating={busy} />
             </ThemedView>

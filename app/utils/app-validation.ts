@@ -11,7 +11,6 @@ export const validateAppKey = async (
         }, 1000);
     });
     if (key) {
-        console.log('Validating key:', key);
         const url = `${AppConfig.propertyDataPath}/${key}`;
         const status = new Promise(
             async (resolve: (value: Record<string, boolean>) => void) => {
