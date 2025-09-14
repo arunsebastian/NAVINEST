@@ -1,10 +1,12 @@
-import { Text, View } from 'react-native';
+import { ThemedFooter, ThemedHeader, ThemedView } from '@/components/themed';
 
 export const NavinestHome = () => {
     return (
-        <View>
-            <Text>Navinest Home</Text>
-        </View>
+        <ThemedView>
+            <ThemedHeader />
+            <ThemedView>Hello World</ThemedView>
+            <ThemedFooter />
+        </ThemedView>
         // <Stack.Navigator>
         //I AM HERE - all the expo routing stuff should happen here - whether tabs or stacks or drawers or slots
         // </Stack.Navigator>

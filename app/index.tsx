@@ -1,6 +1,7 @@
 import Screens from '@/constants/screens';
-import { NavinestWelcome } from '@/screens/navinest-welcome';
 import { NavinestKeyIn } from '@/screens/navinest-keyin';
+import { NavinestWelcome } from '@/screens/navinest-welcome';
+import { NavinestHome } from './screens/navinest-home';
 
 import {
     NavigationContainer,
@@ -27,13 +28,28 @@ const RootElement = () => {
                         name={Screens.navinestKeyIn.key}
                         component={NavinestKeyIn}
                         initialParams={{ id: id }}
-                        options={{ headerShown: false,title:Screens.navinestKeyIn.title }}
+                        options={{
+                            headerShown: false,
+                            title: Screens.navinestKeyIn.title
+                        }}
                     />
                     <Stack.Screen
                         name={Screens.navinestWelcome.key}
                         component={NavinestWelcome}
                         initialParams={{ id: id }}
-                        options={{ headerShown: false,title:Screens.navinestWelcome.title }}
+                        options={{
+                            headerShown: false,
+                            title: Screens.navinestWelcome.title
+                        }}
+                    />
+                    <Stack.Screen
+                        name={Screens.navinestHome.key}
+                        component={NavinestHome}
+                        initialParams={{ id: id }}
+                        options={{
+                            headerShown: false,
+                            title: Screens.navinestHome.title
+                        }}
                     />
                 </Stack.Navigator>
             </NavigationContainer>
