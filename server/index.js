@@ -65,7 +65,7 @@ app.get('/data/:property_id/images/:image', (req, res) => {
 
 // Example: GET /data/<property_id>
 
-app.get('/data/:property_id', (req, res) => {
+app.get('/data/:property_id/manifest.json', (req, res) => {
     const folder = req.params.property_id;
     const filePath = path.join(
         __dirname,
