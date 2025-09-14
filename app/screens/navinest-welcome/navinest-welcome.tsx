@@ -70,6 +70,11 @@ export const NavinestWelcome = ({
                     <VerticalSpacer />
                     <ThemedText type='subtitle'>Welcome To</ThemedText>
                     <VerticalSpacer />
+                    {propertyData?.property?.name && (
+                        <ThemedText type='title'>
+                            {propertyData?.property?.name}
+                        </ThemedText>
+                    )}
                     <ThemedText type='title'>
                         {propertyData?.property?.address}
                     </ThemedText>
