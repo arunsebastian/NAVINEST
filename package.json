@@ -4,7 +4,7 @@
     "type": "module",
     "version": "1.0.0",
     "scripts": {
-        "start": "concurrently \"npm run start:server\" \"npx expo start --web\"",
+        "start": "concurrently \"npm run start:server\" \"npx expo start --web  --port 5000\"",
         "start:server": "node server/index.js",
         "reset-project": "node ./scripts/reset-project.js",
         "web": "npx expo start --web",
