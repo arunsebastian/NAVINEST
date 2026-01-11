@@ -1,13 +1,14 @@
+import React, { ReactElement } from 'react';
 import { type ViewProps, StyleSheet } from 'react-native';
 import Animated, { useAnimatedRef } from 'react-native-reanimated';
 
 import { ThemedView } from '@/components/themed/ThemedView';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { ThemedFooter } from './ThemedFooter';
-import { ThemedHeader } from './ThemedHeader';
 
-export type ThemedParallaxScrollViewProps = ViewProps & {
+export type ThemedScrollViewProps = ViewProps & {
     mode?: string;
+    footer?: ReactElement;
+    header?: ReactElement;
 };
 
 const styles = StyleSheet.create({
@@ -21,12 +22,14 @@ const styles = StyleSheet.create({
     }
 });
 
-export const ThemedParallaxScrollView = ({
+export const ThemedScrollView = ({
     style,
     mode = 'default',
+    header,
+    footer,
     children,
     ...otherProps
-}: ThemedParallaxScrollViewProps) => {
+}: ThemedScrollViewProps) => {
     const backgroundColor = useThemeColor({
         context: 'appBackground',
         mode: mode
@@ -34,7 +37,7 @@ export const ThemedParallaxScrollView = ({
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
     return (
         <ThemedView style={[{ backgroundColor }]}>
-            <ThemedHeader />
+            {header ? header : null}
             <Animated.ScrollView
                 ref={scrollRef}
                 scrollEventThrottle={16}
@@ -42,7 +45,7 @@ export const ThemedParallaxScrollView = ({
             >
                 <ThemedView style={styles.content}>{children}</ThemedView>
             </Animated.ScrollView>
-            <ThemedFooter />
+            {footer ? footer : null}
         </ThemedView>
     );
 };
