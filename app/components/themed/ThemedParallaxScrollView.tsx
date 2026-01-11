@@ -1,4 +1,3 @@
-import type { ReactElement } from 'react';
 import { type ViewProps, StyleSheet } from 'react-native';
 import Animated, { useAnimatedRef } from 'react-native-reanimated';
 
@@ -9,7 +8,6 @@ import { ThemedHeader } from './ThemedHeader';
 
 export type ThemedParallaxScrollViewProps = ViewProps & {
     mode?: string;
-    headerImage?: ReactElement;
 };
 
 const styles = StyleSheet.create({
@@ -27,7 +25,6 @@ export const ThemedParallaxScrollView = ({
     style,
     mode = 'default',
     children,
-    headerImage,
     ...otherProps
 }: ThemedParallaxScrollViewProps) => {
     const backgroundColor = useThemeColor({
