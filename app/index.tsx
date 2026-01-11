@@ -1,7 +1,5 @@
 import Screens from '@/constants/screens';
-import { NavinestKeyIn } from '@/screens/navinest-keyin';
-import { NavinestWelcome } from '@/screens/navinest-welcome';
-import { NavinestHome } from './screens/navinest-home';
+import { NavinestHome, NavinestKeyIn, NavinestWelcome } from '@/screens';
 
 import {
     NavigationContainer,

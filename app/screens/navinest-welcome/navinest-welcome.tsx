@@ -52,9 +52,6 @@ export const NavinestWelcome = ({
         });
     };
 
-    // I AM HERE
-    //::: Start schema building and ui for home page::
-
     return (
         <ThemedView>
             <ThemedHeader />
