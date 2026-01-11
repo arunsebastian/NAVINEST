@@ -12,13 +12,21 @@ export type ThemedScrollViewProps = ViewProps & {
 };
 
 const styles = StyleSheet.create({
+    view: {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+        width: '100%'
+    },
     scrollView: {
         flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1,
         width: '100%',
-        padding: 20
-    },
-    content: {
-        width: '100%'
+        height: '100%',
+        padding: 20,
+        border: '1px solid purple'
     }
 });
 
@@ -36,14 +44,14 @@ export const ThemedScrollView = ({
     });
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
     return (
-        <ThemedView style={[{ backgroundColor }]}>
+        <ThemedView style={[{ backgroundColor }, styles.view]}>
             {header ? header : null}
             <Animated.ScrollView
                 ref={scrollRef}
                 scrollEventThrottle={16}
                 style={[styles.scrollView, style]}
             >
-                <ThemedView style={styles.content}>{children}</ThemedView>
+                {children}
             </Animated.ScrollView>
             {footer ? footer : null}
         </ThemedView>
