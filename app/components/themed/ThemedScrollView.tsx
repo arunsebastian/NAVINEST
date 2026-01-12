@@ -22,12 +22,11 @@ const styles = StyleSheet.create({
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        flexGrow: 1,
         width: '100%',
         height: '100%',
         padding: 20,
         border: '1px solid purple'
-    }
+    } as any
 });
 
 export const ThemedScrollView = ({
