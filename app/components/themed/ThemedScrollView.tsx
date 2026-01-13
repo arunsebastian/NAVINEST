@@ -1,8 +1,7 @@
 import React, { ReactElement } from 'react';
-import { type ViewProps, StyleSheet } from 'react-native';
+import { type ViewProps, StyleSheet, View } from 'react-native';
 import Animated, { useAnimatedRef } from 'react-native-reanimated';
 
-import { ThemedView } from '@/components/themed/ThemedView';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
 export type ThemedScrollViewProps = ViewProps & {
@@ -26,7 +25,10 @@ const styles = StyleSheet.create({
         height: '100%',
         padding: 20,
         border: '1px solid purple'
-    } as any
+    } as any,
+    scrollViewContent: {
+        flexGrow: 1
+    }
 });
 
 export const ThemedScrollView = ({
@@ -43,16 +45,17 @@ export const ThemedScrollView = ({
     });
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
     return (
-        <ThemedView style={[{ backgroundColor }, styles.view]}>
+        <View style={[{ backgroundColor }, styles.view]}>
             {header ? header : null}
             <Animated.ScrollView
                 ref={scrollRef}
                 scrollEventThrottle={16}
+                contentContainerStyle={styles.scrollViewContent}
                 style={[styles.scrollView, style]}
             >
                 {children}
             </Animated.ScrollView>
             {footer ? footer : null}
-        </ThemedView>
+        </View>
     );
 };
