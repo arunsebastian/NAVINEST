@@ -23,8 +23,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         width: '100%',
         height: '100%',
-        padding: 20,
-        border: '1px solid purple'
+        padding: 20
     } as any,
     scrollViewContent: {
         flexGrow: 1

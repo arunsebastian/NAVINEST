@@ -4,7 +4,14 @@
         "id": "ABCD",
         "name": "Sheridan Residence",
         "address": "123 Main St, Springfield, USA",
-        "owner": "John Doe"
+        "owner": "John Doe",
+        "propertyType": "Residential",
+        "size": "2500 sqft",
+        "bedrooms": 4,
+        "bathrooms": 2,
+        "yearBuilt": 2020,
+        "features": ["Garage", "Garden", "Swimming Pool"],
+        "description": "Beautiful family home located in a quiet neighborhood with modern amenities."
     },
     "pages": [
         {
@@ -20,7 +27,7 @@
         {
             "id": "about_the_property",
             "title": "About The House",
-            "content": "Beautiful family home located in a quiet neighborhood with modern amenities.3 bedrooms, 2 bathrooms, built in 2005, 1500 sqft."
+            "content": "Beautiful family home located in a quiet neighborhood with modern amenities.4 bedrooms, 2 bathrooms, built in 2020, 2500 sqft."
         },
         {
             "id": "house_rules",

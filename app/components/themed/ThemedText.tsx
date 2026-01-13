@@ -24,21 +24,25 @@ export function ThemedText({
     const styles = StyleSheet.create({
         default: {
             fontSize: 16,
-            lineHeight: 24
+            lineHeight: 24,
+            userSelect: 'none'
         },
         defaultSemiBold: {
             fontSize: 16,
             lineHeight: 24,
-            fontWeight: '600'
+            fontWeight: '600',
+            userSelect: 'none'
         },
         title: {
             fontSize: 24,
             fontWeight: 'bold',
-            lineHeight: 32
+            lineHeight: 32,
+            userSelect: 'none'
         },
         subtitle: {
             fontSize: 20,
-            fontWeight: '400'
+            fontWeight: '400',
+            userSelect: 'none'
         },
         link: {
             lineHeight: 30,
@@ -47,7 +51,8 @@ export function ThemedText({
         },
         error: {
             fontSize: 14,
-            color: 'red'
+            color: 'red',
+            userSelect: 'none'
         }
     });
 

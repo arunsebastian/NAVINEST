@@ -1,7 +1,8 @@
 {
-    "barcode":"http://localhost:3000/data/xyz/images/barcode.png",
-    "property":{
+    "barcode": "http://localhost:3000/data/xyz/images/barcode.png",
+    "property": {
         "id": "xyz",
+        "name": null,
         "address": "27 Ede Road, Collingwood Park,QLD - 4301",
         "owner": "Arun Sebastian",
         "propertyType": "Residential",
@@ -10,8 +11,68 @@
         "bathrooms": 2,
         "yearBuilt": 2005,
         "features": ["Garage", "Garden", "Swimming Pool"],
-        "price": "$300,000",
-        "status": "For Sale",
         "description": "Beautiful family home located in a quiet neighborhood with modern amenities."
-    }
+    },
+    "pages": [
+        {
+            "id": "welcome",
+            "title": "Welcome",
+            "content": "Welcome to our home! We're excited to have you here."
+        },
+        {
+            "id": "arrival_and_access",
+            "title": "Arrival & Access",
+            "content": "Please use the main entrance. Access code: 1234."
+        },
+        {
+            "id": "about_the_property",
+            "title": "About The House",
+            "content": "Beautiful family home located in a quiet neighborhood with modern amenities.3 bedrooms, 2 bathrooms, built in 2005, 2500 sqft."
+        },
+        {
+            "id": "house_rules",
+            "title": "House Rules",
+            "content": "No smoking, no pets, quiet hours from 10 PM to 7 AM."
+        },
+        {
+            "id": "house_appliances",
+            "title": "House Appliances",
+            "content": "Washer, Dryer, Dishwasher, Microwave, Refrigerator."
+        },
+        {
+            "id": "getting_around",
+            "title": "Getting Around",
+            "content": "Public transport available nearby. Parking available on-site."
+        },
+        {
+            "id": "places_to_visit",
+            "title": "Places To Visit",
+            "content": "Local park, museum, shopping center, and restaurants within walking distance."
+        },
+        {
+            "id": "restuarants_and_bars",
+            "title": "Restaurants & Bars",
+            "content": "Recommended places include The Italian Bistro, Sushi Place, and The Local Pub."
+        },
+        {
+            "id": "offers",
+            "title": "Offers",
+            "content": "10% off your first stay, free breakfast for bookings over 3 nights."
+        },
+        {
+            "id": "city_heritage",
+            "title": "City Heritage",
+            "content": "Springfield is known for its rich history and vibrant culture, with landmarks dating back to the 18th century."
+        },
+        {
+            "id": "before_you_leave",
+            "title": "Before You Leave",
+            "content": "Please ensure all lights are off, windows are closed, and keys are returned to the lockbox."
+        },
+        {
+            "id": "emergency",
+            "title": "Emergency",
+            "content": "In case of emergency, call 911. For non-emergencies, contact the property manager at (555) 123-4567."
+        }
+    ]
 }
