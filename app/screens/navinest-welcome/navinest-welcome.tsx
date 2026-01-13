@@ -52,6 +52,18 @@ export const NavinestWelcome = ({
         });
     };
 
+    useEffect(() => {
+        if (propertyData && navigation) {
+            // Set a timeout to navigate to the next screen after 5 seconds (5000ms)
+            const timeoutId = setTimeout(() => {
+                proceedToHome();
+            }, 2500);
+
+            // Cleanup function to clear the timeout if the component unmounts
+            return () => clearTimeout(timeoutId);
+        }
+    }, [navigation, propertyData]);
+
     return (
         <ThemedView>
             <ThemedHeader />
