@@ -29,7 +29,6 @@ const createComponentStyles = ({ disabled }: any) => {
             height: 40,
             borderRadius: 10,
             padding: 15,
-            backgroundColor: 'red',
             opacity: disabled ? 0.5 : 1
         },
         buttonText: {
