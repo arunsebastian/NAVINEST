@@ -4,7 +4,13 @@ import {
     ThemedScrollView
 } from '@/components/themed';
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+    GestureResponderEvent,
+    Pressable,
+    StyleSheet,
+    Text,
+    View
+} from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 
 const styles = StyleSheet.create({
@@ -56,16 +62,15 @@ export const NavinestHome = () => {
         { name: 'ASBESTOS', code: '#7f8c8d' }
     ]);
 
+    const navigateToDetails = (event: GestureResponderEvent) => {
+        console.log('Navigate to details of the clicked item');
+    };
+
     const renderHomeItem = ({ item }: any) => {
         return (
-            <TouchableOpacity
-                style={{
-                    flex: 1,
-                    padding: 1
-                }}
-                onPress={() => {
-                    console.log(item.id, 'pressed');
-                }}
+            <Pressable
+                onPress={navigateToDetails}
+                style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1.0 }]}
             >
                 <View
                     style={[
@@ -76,10 +81,16 @@ export const NavinestHome = () => {
                     <Text style={styles.itemName}>{item.name}</Text>
                     <Text style={styles.itemCode}>{item.code}</Text>
                 </View>
-            </TouchableOpacity>
+                {/* <View style={styles.boxContainer}>
+                    <Image
+                        source={{ uri: item.imageUrl }}
+                        style={styles.box}
+                        resizeMode='cover'
+                    />
+                </View> */}
+            </Pressable>
         );
     };
-
     return (
         <ThemedScrollView header={<ThemedHeader />} footer={<ThemedFooter />}>
             <FlatGrid
