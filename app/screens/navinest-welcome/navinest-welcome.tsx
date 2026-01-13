@@ -1,3 +1,4 @@
+import AppConfig from '@/constants/config';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
@@ -54,12 +55,12 @@ export const NavinestWelcome = ({
 
     useEffect(() => {
         if (propertyData && navigation) {
-            // Set a timeout to navigate to the next screen after 5 seconds (5000ms)
+            // Set a timeout to navigate to the next screen after the delay set in config
             const timeoutId = setTimeout(() => {
                 proceedToHome();
-            }, 2500);
+            }, AppConfig.homeScreenTransitionDelay * 1000);
 
-            // Cleanup function to clear the timeout if the component unmounts
+            // Cleanup function to clear the timeout when the component unmounts
             return () => clearTimeout(timeoutId);
         }
     }, [navigation, propertyData]);
