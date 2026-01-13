@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { type ViewProps, StyleSheet, View } from 'react-native';
+import { type ViewProps, SafeAreaView, StyleSheet } from 'react-native';
 import Animated, { useAnimatedRef } from 'react-native-reanimated';
 
 import { useThemeColor } from '@/hooks/useThemeColor';
@@ -44,7 +44,7 @@ export const ThemedScrollView = ({
     });
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
     return (
-        <View style={[{ backgroundColor }, styles.view]}>
+        <SafeAreaView style={[{ backgroundColor }, styles.view]}>
             {header ? header : null}
             <Animated.ScrollView
                 ref={scrollRef}
@@ -55,6 +55,6 @@ export const ThemedScrollView = ({
                 {children}
             </Animated.ScrollView>
             {footer ? footer : null}
-        </View>
+        </SafeAreaView>
     );
 };

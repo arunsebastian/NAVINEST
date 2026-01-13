@@ -1,13 +1,13 @@
-import { useThemeColor } from '@/hooks/useThemeColor';
 import { useRoute } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { Image, View } from 'react-native';
+import { Image } from 'react-native';
 
 import {
     ThemedFooter,
     ThemedHeader,
     ThemedScrollView,
-    ThemedText
+    ThemedText,
+    ThemedThumbnailView
 } from '@/components/themed';
 
 import { GestureResponderEvent, Pressable, StyleSheet } from 'react-native';
@@ -20,17 +20,6 @@ const styles = StyleSheet.create({
         flex: 1,
         display: 'flex'
     },
-    itemContainer: {
-        padding: 10,
-        height: 150,
-        borderRadius: 8,
-        cursor: 'pointer',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 10
-    },
     itemName: {
         fontSize: 16,
         fontWeight: '600',
@@ -40,17 +29,14 @@ const styles = StyleSheet.create({
     imgBox: {
         marginTop: 10,
         width: 50,
-        height: 50
+        height: 50,
+        userSelect: 'none'
     }
 });
 
 export const NavinestHome = () => {
     const { id, data } = useRoute().params as any;
     const [homePages, setHomePages] = useState<Array<Record<string, any>>>([]);
-    const backgroundColorDefault = useThemeColor({
-        context: 'toolbarBackGround',
-        mode: 'default'
-    });
 
     const navigateToDetails = (event: GestureResponderEvent) => {
         console.log('Navigate to details of the clicked item');
@@ -62,24 +48,18 @@ export const NavinestHome = () => {
                 <Pressable
                     onPress={navigateToDetails}
                     onHoverIn={({ target }: any) => {
-                        target.style.opacity = 0.8;
+                        target.style.opacity = 0.6;
                     }}
                     onHoverOut={({ target }: any) => {
                         target.style.opacity = 1.0;
                     }}
                     style={({ pressed }) => [
                         {
-                            opacity: pressed ? 0.8 : 1.0
+                            opacity: pressed ? 0.6 : 1.0
                         }
                     ]}
                 >
-                    <View
-                        id={item.id}
-                        style={[
-                            styles.itemContainer,
-                            { backgroundColor: backgroundColorDefault }
-                        ]}
-                    >
+                    <ThemedThumbnailView id={item.id}>
                         <Image
                             source={require('@assets/images/parking.png')}
                             style={styles.imgBox}
@@ -88,7 +68,7 @@ export const NavinestHome = () => {
                         <ThemedText style={styles.itemName}>
                             {item.title}
                         </ThemedText>
-                    </View>
+                    </ThemedThumbnailView>
                 </Pressable>
             )
         );

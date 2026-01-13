@@ -5,4 +5,5 @@ export { ThemedHeader } from './ThemedHeader';
 export { ThemedScrollView } from './ThemedScrollView';
 export { ThemedText } from './ThemedText';
 export { ThemedTextInput } from './ThemedTextInput';
+export { ThemedThumbnailView } from './ThemedThumbnailView';
 export { ThemedView } from './ThemedView';

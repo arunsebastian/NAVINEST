@@ -7,6 +7,7 @@ export const Colors = {
         textInputBorder: '#F97E25',
         buttonBackgroundDefault: '#F97E25',
         buttonBackgroundPressed: '#f56b08ff',
+        thumbnailShadowColor: '#ddd',
         buttonText: '#FFFFFF',
         text: '#000'
     }
