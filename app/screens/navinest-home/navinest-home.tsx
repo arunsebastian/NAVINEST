@@ -1,20 +1,16 @@
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { useRoute } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 
 import {
     ThemedFooter,
     ThemedHeader,
-    ThemedScrollView
+    ThemedScrollView,
+    ThemedText
 } from '@/components/themed';
 
-import {
-    GestureResponderEvent,
-    Pressable,
-    StyleSheet,
-    Text
-} from 'react-native';
+import { GestureResponderEvent, Pressable, StyleSheet } from 'react-native';
 
 import { FlatGrid } from 'react-native-super-grid';
 
@@ -25,105 +21,81 @@ const styles = StyleSheet.create({
         display: 'flex'
     },
     itemContainer: {
-        justifyContent: 'flex-end',
-        borderRadius: 10,
         padding: 10,
         height: 150,
-        cursor: 'pointer'
+        borderRadius: 8,
+        cursor: 'pointer',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: 10
     },
     itemName: {
         fontSize: 16,
-        color: '#fff',
         fontWeight: '600',
-        userSelect: 'none'
+        userSelect: 'none',
+        textAlign: 'center'
     },
-    itemCode: {
-        fontWeight: '600',
-        fontSize: 12,
-        color: '#fff',
-        userSelect: 'none'
+    imgBox: {
+        marginTop: 10,
+        width: 50,
+        height: 50
     }
 });
 
 export const NavinestHome = () => {
     const { id, data } = useRoute().params as any;
-    const [homePages, setHomePages] = useState<Array<Record<string, any>>>(
-        data?.pages ?? []
-    );
+    const [homePages, setHomePages] = useState<Array<Record<string, any>>>([]);
     const backgroundColorDefault = useThemeColor({
-        context: 'buttonBackgroundDefault',
+        context: 'toolbarBackGround',
         mode: 'default'
     });
-    const backgroundColorPressed = useThemeColor({
-        context: 'buttonBackgroundPressed',
-        mode: 'default'
-    });
-    const [items, setItems] = useState([
-        { name: 'TURQUOISE', code: '#1abc9c' },
-        { name: 'EMERALD', code: '#2ecc71' },
-        { name: 'PETER RIVER', code: '#3498db' },
-        { name: 'AMETHYST', code: '#9b59b6' },
-        { name: 'WET ASPHALT', code: '#34495e' },
-        { name: 'GREEN SEA', code: '#16a085' },
-        { name: 'NEPHRITIS', code: '#27ae60' },
-        { name: 'BELIZE HOLE', code: '#2980b9' },
-        { name: 'WISTERIA', code: '#8e44ad' },
-        { name: 'MIDNIGHT BLUE', code: '#2c3e50' },
-        { name: 'SUN FLOWER', code: '#f1c40f' },
-        { name: 'CARROT', code: '#e67e22' },
-        { name: 'ALIZARIN', code: '#e74c3c' },
-        { name: 'CLOUDS', code: '#ecf0f1' },
-        { name: 'CONCRETE', code: '#95a5a6' },
-        { name: 'ORANGE', code: '#f39c12' },
-        { name: 'PUMPKIN', code: '#d35400' },
-        { name: 'POMEGRANATE', code: '#c0392b' },
-        { name: 'SILVER', code: '#bdc3c7' },
-        { name: 'ASBESTOS', code: '#7f8c8d' }
-    ]);
 
     const navigateToDetails = (event: GestureResponderEvent) => {
         console.log('Navigate to details of the clicked item');
     };
 
-    const renderHomeItem = ({ page }: any) => {
-        console.log(page);
+    const renderHomeItem = ({ item }: Record<string, any>) => {
         return (
-            <Pressable
-                onPress={navigateToDetails}
-                style={({ pressed }) => [
-                    {
-                        backgroundColor: pressed
-                            ? backgroundColorPressed
-                            : backgroundColorDefault
-                    }
-                ]}
-            >
-                <View
-                    id={page.id}
-                    style={[
-                        styles.itemContainer,
-                        { backgroundColor: backgroundColorDefault }
+            item && (
+                <Pressable
+                    onPress={navigateToDetails}
+                    onHoverIn={({ target }: any) => {
+                        target.style.opacity = 0.8;
+                    }}
+                    onHoverOut={({ target }: any) => {
+                        target.style.opacity = 1.0;
+                    }}
+                    style={({ pressed }) => [
+                        {
+                            opacity: pressed ? 0.8 : 1.0
+                        }
                     ]}
                 >
-                    <Text style={styles.itemName}>{page.title}</Text>
-                    {/* <Text style={styles.itemCode}>{item.code}</Text> */}
-                </View>
-                {/* <View style={styles.boxContainer}>
-                    <Image
-                        source={{ uri: item.imageUrl }}
-                        style={styles.box}
-                        resizeMode='cover'
-                    />
-                </View> */}
-            </Pressable>
+                    <View
+                        id={item.id}
+                        style={[
+                            styles.itemContainer,
+                            { backgroundColor: backgroundColorDefault }
+                        ]}
+                    >
+                        <Image
+                            source={require('@assets/images/parking.png')}
+                            style={styles.imgBox}
+                            resizeMode='cover'
+                        />
+                        <ThemedText style={styles.itemName}>
+                            {item.title}
+                        </ThemedText>
+                    </View>
+                </Pressable>
+            )
         );
     };
 
     useEffect(() => {
         if (data) {
-            console.log('Pages-------------------');
-            console.log(...data.pages);
-            console.log('-------------------');
             setHomePages([...data.pages]);
         }
     }, [data]);

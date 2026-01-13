@@ -27,7 +27,7 @@ const createComponentStyles = ({ disabled }: any) => {
             alignItems: 'center',
             justifyContent: 'center',
             height: 40,
-            borderRadius: 5,
+            borderRadius: 10,
             padding: 15,
             backgroundColor: 'red',
             opacity: disabled ? 0.5 : 1
