@@ -20,6 +20,11 @@ const styles = StyleSheet.create({
         flex: 1,
         display: 'flex'
     },
+    gridItemView: {
+        marginTop: 0,
+        marginBottom: 15,
+        marginLeft: 15
+    },
     itemName: {
         fontSize: 16,
         fontWeight: '600',
@@ -59,7 +64,10 @@ export const NavinestHome = () => {
                         }
                     ]}
                 >
-                    <ThemedThumbnailView id={item.id}>
+                    <ThemedThumbnailView
+                        id={item.id}
+                        style={styles.gridItemView}
+                    >
                         <Image
                             source={require('@assets/images/parking.png')}
                             style={styles.imgBox}
