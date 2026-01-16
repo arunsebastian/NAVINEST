@@ -16,7 +16,7 @@ import { FlatGrid } from 'react-native-super-grid';
 
 const styles = StyleSheet.create({
     gridView: {
-        marginTop: 10,
+        margin: 10,
         flex: 1,
         display: 'flex'
     },
@@ -83,10 +83,9 @@ export const NavinestHome = () => {
     return (
         <ThemedScrollView header={<ThemedHeader />} footer={<ThemedFooter />}>
             <FlatGrid
-                itemDimension={130}
+                itemDimension={150}
                 data={homePages}
                 style={styles.gridView}
-                spacing={50}
                 renderItem={renderHomeItem}
             />
         </ThemedScrollView>
