@@ -1,101 +1,55 @@
-import { useRoute } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
-import { Image } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
+import { Text, View } from 'react-native';
 
-import {
-    ThemedFooter,
-    ThemedHeader,
-    ThemedScrollView,
-    ThemedText,
-    ThemedThumbnailView
-} from '@/components/themed';
+type ScreenConfig = {
+    name: string;
+    component: React.ComponentType<any>;
+    options?: Record<string, any>;
+};
 
-import { GestureResponderEvent, Pressable, StyleSheet } from 'react-native';
+type Props = {
+    screens?: ScreenConfig[];
+    initialRouteName?: string;
+};
 
-import { FlatGrid } from 'react-native-super-grid';
+const Stack = createNativeStackNavigator();
 
-const styles = StyleSheet.create({
-    gridView: {
-        margin: 10,
-        flex: 1,
-        display: 'flex'
-    },
-    gridItemView: {
-        marginTop: 0,
-        marginBottom: 15,
-        marginLeft: 15
-    },
-    itemName: {
-        fontSize: 16,
-        fontWeight: '600',
-        userSelect: 'none',
-        textAlign: 'center'
-    },
-    imgBox: {
-        marginTop: 10,
-        width: 50,
-        height: 50,
-        userSelect: 'none'
-    }
-});
-
-export const NavinestHome = () => {
-    const { id, data } = useRoute().params as any;
-    const [homePages, setHomePages] = useState<Array<Record<string, any>>>([]);
-
-    const navigateToDetails = (event: GestureResponderEvent) => {
-        console.log('Navigate to details of the clicked item');
-    };
-
-    const renderHomeItem = ({ item }: Record<string, any>) => {
-        return (
-            item && (
-                <Pressable
-                    onPress={navigateToDetails}
-                    onHoverIn={({ target }: any) => {
-                        target.style.opacity = 0.6;
-                    }}
-                    onHoverOut={({ target }: any) => {
-                        target.style.opacity = 1.0;
-                    }}
-                    style={({ pressed }) => [
-                        {
-                            opacity: pressed ? 0.6 : 1.0
-                        }
-                    ]}
-                >
-                    <ThemedThumbnailView
-                        id={item.id}
-                        style={styles.gridItemView}
-                    >
-                        <Image
-                            source={require('@assets/images/parking.png')}
-                            style={styles.imgBox}
-                            resizeMode='cover'
-                        />
-                        <ThemedText style={styles.itemName}>
-                            {item.title}
-                        </ThemedText>
-                    </ThemedThumbnailView>
-                </Pressable>
-            )
+const Placeholder =
+    (label: string): React.FC =>
+    () =>
+        (
+            <View
+                style={{
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}
+            >
+                <Text>{label}</Text>
+            </View>
         );
-    };
 
-    useEffect(() => {
-        if (data) {
-            setHomePages([...data.pages]);
-        }
-    }, [data]);
+// Default dynamic screens (replace or pass `screens` prop to override)
+const screens: ScreenConfig[] = [
+    { name: 'Home', component: Placeholder('Home Screen') },
+    { name: 'Details', component: Placeholder('Details Screen') },
+    { name: 'Settings', component: Placeholder('Settings Screen') }
+];
 
+export const NavinestHome = ({ initialRouteName }: Props) => {
     return (
-        <ThemedScrollView header={<ThemedHeader />} footer={<ThemedFooter />}>
-            <FlatGrid
-                itemDimension={150}
-                data={homePages}
-                style={styles.gridView}
-                renderItem={renderHomeItem}
-            />
-        </ThemedScrollView>
+        <Stack.Navigator
+            initialRouteName={initialRouteName ?? screens[0]?.name}
+        >
+            {screens.map(({ name, component, options }) => (
+                <Stack.Screen
+                    key={name}
+                    name={name}
+                    component={component}
+                    options={options}
+                />
+            ))}
+        </Stack.Navigator>
     );
 };
