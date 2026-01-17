@@ -7,9 +7,16 @@ const Screens = {
         key: 'NavinestWelcome',
         title: 'Welcome'
     },
-    navinestControlCenter: {
-        key: 'NavinestControlCenter',
-        title: 'Control Center'
+    navinestHub: {
+        key: 'NavinestHub'
     }
 };
-export default Screens;
+
+const HubScreens = {
+    navinestHome: {
+        key: 'Home',
+        title: 'Home'
+    }
+};
+
+export { HubScreens, Screens };

@@ -8,7 +8,7 @@ import {
     ThemedView
 } from '@/components/themed';
 import AppConfig from '@/constants/config';
-import Screens from '@/constants/screens';
+import { Screens } from '@/constants/screens';
 import Strings from '@/strings';
 
 import { validateAppKey } from '@/utils/app-validation';

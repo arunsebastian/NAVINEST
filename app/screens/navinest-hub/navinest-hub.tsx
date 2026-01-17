@@ -41,7 +41,7 @@ const screens: ScreenConfig[] = [
     { name: 'Settings', component: Placeholder('Settings Screen') }
 ];
 
-export const NavinestControlCenter = ({ initialRouteName }: Props) => {
+export const NavinestHub = ({ initialRouteName }: Props) => {
     return (
         <NavigationIndependentTree>
             <NavigationContainer>

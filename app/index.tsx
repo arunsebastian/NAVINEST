@@ -1,9 +1,5 @@
-import Screens from '@/constants/screens';
-import {
-    NavinestControlCenter,
-    NavinestKeyIn,
-    NavinestWelcome
-} from '@/screens';
+import { Screens } from '@/constants/screens';
+import { NavinestHub, NavinestKeyIn, NavinestWelcome } from '@/screens';
 
 import {
     NavigationContainer,
@@ -45,12 +41,12 @@ const RootElement = () => {
                         }}
                     />
                     <Stack.Screen
-                        name={Screens.navinestControlCenter.key}
-                        component={NavinestControlCenter}
+                        name={Screens.navinestHub.key}
+                        component={NavinestHub}
                         initialParams={{ id: id }}
                         options={{
                             headerShown: false,
-                            title: Screens.navinestControlCenter.title
+                            title: Screens.navinestHub.title
                         }}
                     />
                 </Stack.Navigator>

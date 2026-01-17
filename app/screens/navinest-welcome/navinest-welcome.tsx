@@ -14,7 +14,7 @@ import {
 } from '@/components/themed';
 
 import { VerticalSpacer } from '@/components/ui';
-import Screens from '@/constants/screens';
+import { Screens } from '@/constants/screens';
 import Strings from '@/strings';
 import { getPropertyData } from '@/utils/app-validation';
 
@@ -46,8 +46,8 @@ export const NavinestWelcome = ({
         }
     }, [id, hasFocus]);
 
-    const proceedToHome = async () => {
-        navigation.replace(Screens.navinestControlCenter.key, {
+    const proceedToHub = async () => {
+        navigation.replace(Screens.navinestHub.key, {
             id: id,
             data: propertyData
         });
@@ -57,7 +57,7 @@ export const NavinestWelcome = ({
         if (propertyData && navigation) {
             // Set a timeout to navigate to the next screen after the delay set in config
             const timeoutId = setTimeout(() => {
-                proceedToHome();
+                proceedToHub();
             }, AppConfig.homeScreenTransitionDelay * 1000);
 
             // Cleanup function to clear the timeout when the component unmounts
@@ -95,7 +95,7 @@ export const NavinestWelcome = ({
                     <ThemedButton
                         style={{ containerStyles: styles.homeBtnContainer }}
                         label={Strings.home}
-                        onPress={proceedToHome}
+                        onPress={proceedToHub}
                     />
                 </ThemedView>
             )}
