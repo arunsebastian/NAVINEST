@@ -13,7 +13,7 @@ const Screens = {
 };
 
 const HubScreens = {
-    navinestHome: {
+    home: {
         key: 'Home',
         title: 'Home'
     }

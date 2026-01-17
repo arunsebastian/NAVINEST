@@ -43,17 +43,23 @@ const Placeholder =
 
 export const NavinestHub = () => {
     const { id, data } = useRoute().params as any;
+
+    // I AM HERE :: APPROACH IS TO LOAD SCREENS DYNAMICALLY FROM data PASSED VIA ROUTE PARAMS
+    // So create a template for HubItem Screen and load screens from data
+
+    const [hubScreens, setHubScreens] = React.useState<ScreenConfig[]>([]);
+
     return (
         <NavigationIndependentTree>
             <NavigationContainer>
                 <HubStack.Navigator>
                     <HubStack.Screen
-                        name={HubScreens.navinestHome.key}
+                        name={HubScreens.home.key}
                         component={Home}
                         initialParams={{ id: id, data: data }}
                         options={{
                             headerShown: false,
-                            title: HubScreens.navinestHome.title
+                            title: HubScreens.home.title
                         }}
                     />
                     {/* {screens.map(({ name, component, options }) => (
