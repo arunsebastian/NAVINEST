@@ -1,15 +1,15 @@
-const  Screens = {
-    navinestKeyIn:{
-        key:'NavinestKeyIn',
-        title:'Key In'
+const Screens = {
+    navinestKeyIn: {
+        key: 'NavinestKeyIn',
+        title: 'Key In'
     },
-    navinestWelcome:{
-        key:'NavinestWelcome',
-        title:'Welcome'
+    navinestWelcome: {
+        key: 'NavinestWelcome',
+        title: 'Welcome'
     },
-    navinestHome:{
-        key:'NavinestHome',
-        title:'Home'
+    navinestControlCenter: {
+        key: 'NavinestControlCenter',
+        title: 'Control Center'
     }
-}
-export default Screens
+};
+export default Screens;

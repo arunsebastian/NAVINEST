@@ -1,3 +1,7 @@
+import {
+    NavigationContainer,
+    NavigationIndependentTree
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { Text, View } from 'react-native';
@@ -37,19 +41,26 @@ const screens: ScreenConfig[] = [
     { name: 'Settings', component: Placeholder('Settings Screen') }
 ];
 
-export const NavinestHome = ({ initialRouteName }: Props) => {
+export const NavinestControlCenter = ({ initialRouteName }: Props) => {
     return (
-        <Stack.Navigator
-            initialRouteName={initialRouteName ?? screens[0]?.name}
-        >
-            {screens.map(({ name, component, options }) => (
-                <Stack.Screen
-                    key={name}
-                    name={name}
-                    component={component}
-                    options={options}
-                />
-            ))}
-        </Stack.Navigator>
+        <NavigationIndependentTree>
+            <NavigationContainer>
+                <Stack.Navigator
+                    initialRouteName={initialRouteName ?? screens[0]?.name}
+                >
+                    {screens.map(({ name, component, options }) => (
+                        <Stack.Screen
+                            key={name}
+                            name={name}
+                            component={component}
+                            options={{
+                                headerShown: false
+                                //title: Screens.navinestHome.title
+                            }}
+                        />
+                    ))}
+                </Stack.Navigator>
+            </NavigationContainer>
+        </NavigationIndependentTree>
     );
 };

@@ -47,7 +47,7 @@ export const NavinestWelcome = ({
     }, [id, hasFocus]);
 
     const proceedToHome = async () => {
-        navigation.replace(Screens.navinestHome.key, {
+        navigation.replace(Screens.navinestControlCenter.key, {
             id: id,
             data: propertyData
         });
