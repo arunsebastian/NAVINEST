@@ -45,8 +45,7 @@ const RootElement = () => {
                         component={NavinestHub}
                         initialParams={{ id: id }}
                         options={{
-                            headerShown: false,
-                            title: Screens.navinestHub.title
+                            headerShown: false
                         }}
                     />
                 </Stack.Navigator>

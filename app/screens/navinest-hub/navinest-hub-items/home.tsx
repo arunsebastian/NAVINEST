@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export const NavinestHome = () => {
+export const Home = () => {
     const { id, data } = useRoute().params as any;
     const [homePages, setHomePages] = useState<Array<Record<string, any>>>([]);
 

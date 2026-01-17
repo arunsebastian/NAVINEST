@@ -1,10 +1,15 @@
 import {
     NavigationContainer,
-    NavigationIndependentTree
+    NavigationIndependentTree,
+    useRoute
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+
 import { Text, View } from 'react-native';
+
+import { HubScreens } from '@/constants/screens';
+import { Home } from './navinest-hub-items';
 
 type ScreenConfig = {
     name: string;
@@ -12,12 +17,7 @@ type ScreenConfig = {
     options?: Record<string, any>;
 };
 
-type Props = {
-    screens?: ScreenConfig[];
-    initialRouteName?: string;
-};
-
-const Stack = createNativeStackNavigator();
+const HubStack = createNativeStackNavigator();
 
 const Placeholder =
     (label: string): React.FC =>
@@ -35,31 +35,39 @@ const Placeholder =
         );
 
 // Default dynamic screens (replace or pass `screens` prop to override)
-const screens: ScreenConfig[] = [
-    { name: 'Home', component: Placeholder('Home Screen') },
-    { name: 'Details', component: Placeholder('Details Screen') },
-    { name: 'Settings', component: Placeholder('Settings Screen') }
-];
+// const screens: ScreenConfig[] = [
+//     { name: 'Home', component: Placeholder('Home Screen') },
+//     { name: 'Details', component: Placeholder('Details Screen') },
+//     { name: 'Settings', component: Placeholder('Settings Screen') }
+// ];
 
-export const NavinestHub = ({ initialRouteName }: Props) => {
+export const NavinestHub = () => {
+    const { id, data } = useRoute().params as any;
     return (
         <NavigationIndependentTree>
             <NavigationContainer>
-                <Stack.Navigator
-                    initialRouteName={initialRouteName ?? screens[0]?.name}
-                >
-                    {screens.map(({ name, component, options }) => (
-                        <Stack.Screen
+                <HubStack.Navigator>
+                    <HubStack.Screen
+                        name={HubScreens.navinestHome.key}
+                        component={Home}
+                        initialParams={{ id: id, data: data }}
+                        options={{
+                            headerShown: false,
+                            title: HubScreens.navinestHome.title
+                        }}
+                    />
+                    {/* {screens.map(({ name, component, options }) => (
+                        <HubStack.Screen
                             key={name}
                             name={name}
                             component={component}
                             options={{
-                                headerShown: false
-                                //title: Screens.navinestHome.title
+                                headerShown: false,
+                                title: name
                             }}
                         />
-                    ))}
-                </Stack.Navigator>
+                    ))} */}
+                </HubStack.Navigator>
             </NavigationContainer>
         </NavigationIndependentTree>
     );
