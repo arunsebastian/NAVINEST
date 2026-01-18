@@ -1,4 +1,5 @@
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
 import { Image } from 'react-native';
 
@@ -41,17 +42,26 @@ const styles = StyleSheet.create({
 
 export const Home = () => {
     const { id, data } = useRoute().params as any;
-    const [homePages, setHomePages] = useState<Array<Record<string, any>>>([]);
+    const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
-    const navigateToDetails = (event: GestureResponderEvent) => {
-        console.log('Navigate to details of the clicked item');
+    const [pageTriggers, setPageTriggers] = useState<
+        Array<Record<string, any>>
+    >([]);
+
+    const navigateToDetails = (
+        event: GestureResponderEvent,
+        item: Record<string, any>
+    ) => {
+        navigation.navigate(item.title);
     };
 
     const renderHomeItem = ({ item }: Record<string, any>) => {
         return (
             item && (
                 <Pressable
-                    onPress={navigateToDetails}
+                    onPress={(event: GestureResponderEvent) =>
+                        navigateToDetails(event, item)
+                    }
                     onHoverIn={({ target }: any) => {
                         target.style.opacity = 0.6;
                     }}
@@ -84,7 +94,7 @@ export const Home = () => {
 
     useEffect(() => {
         if (data) {
-            setHomePages([...data.pages]);
+            setPageTriggers([...data.pages]);
         }
     }, [data]);
 
@@ -92,7 +102,7 @@ export const Home = () => {
         <ThemedScrollView header={<ThemedHeader />} footer={<ThemedFooter />}>
             <FlatGrid
                 itemDimension={150}
-                data={homePages}
+                data={pageTriggers}
                 style={styles.gridView}
                 renderItem={renderHomeItem}
             />
