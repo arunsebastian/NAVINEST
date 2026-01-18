@@ -50,7 +50,7 @@ export const NavinestHub = () => {
                             {() => (
                                 <HubItemScreen
                                     screenConfig={screenConfig}
-                                    initialCollapsed={false}
+                                    menuExpanded={false}
                                 />
                             )}
                         </HubStack.Screen>
