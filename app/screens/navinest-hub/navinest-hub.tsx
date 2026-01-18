@@ -47,7 +47,12 @@ export const NavinestHub = () => {
                                 title: screenConfig.title
                             }}
                         >
-                            {() => <HubItem screenConfig={screenConfig} />}
+                            {() => (
+                                <HubItem
+                                    screenConfig={screenConfig}
+                                    initialCollapsed={false}
+                                />
+                            )}
                         </HubStack.Screen>
                     )
                 )
