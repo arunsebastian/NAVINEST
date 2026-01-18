@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
 
 import { HubScreens } from '@/constants/screens';
-import { Home, HubItem } from './navinest-hub-items';
+import { Home, HubItemScreen } from './navinest-hub-items';
 
 export type ScreenConfig = {
     id: string;
@@ -48,7 +48,7 @@ export const NavinestHub = () => {
                             }}
                         >
                             {() => (
-                                <HubItem
+                                <HubItemScreen
                                     screenConfig={screenConfig}
                                     initialCollapsed={false}
                                 />

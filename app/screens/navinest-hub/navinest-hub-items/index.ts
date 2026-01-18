@@ -1,2 +1,2 @@
 export { Home } from './home';
-export { HubItem } from './hub-item';
+export { HubItemScreen } from './hub-item-screen';

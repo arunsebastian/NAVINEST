@@ -2,13 +2,13 @@ import React from 'react';
 import { Animated, Text, TouchableOpacity, View } from 'react-native';
 import { ScreenConfig } from '../navinest-hub';
 
-type HubItemProps = {
+type HubItemScreenProps = {
     screenConfig: ScreenConfig;
     drawerWidth?: number;
     initialCollapsed?: boolean;
 };
 
-export const HubItem: React.FC<HubItemProps> = ({
+export const HubItemScreen: React.FC<HubItemScreenProps> = ({
     screenConfig,
     drawerWidth = 280,
     initialCollapsed = true
