@@ -1,5 +1,6 @@
 export { ThemedActivityIndicator } from './ThemedActivityIndicator';
 export { ThemedButton } from './ThemedButton';
+export { ThemedDrawer } from './ThemedDrawer';
 export { ThemedFooter } from './ThemedFooter';
 export { ThemedHeader } from './ThemedHeader';
 export { ThemedScrollView } from './ThemedScrollView';

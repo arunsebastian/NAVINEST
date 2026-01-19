@@ -1,56 +1,166 @@
-import { ThemedScrollView, ThemedText } from '@/components/themed';
-import * as React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import { Drawer } from 'react-native-drawer-layout';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { useRef } from 'react';
+import {
+    Dimensions,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
+
+import {
+    ThemedDrawer,
+    ThemedFooter,
+    ThemedHeader,
+    ThemedScrollView
+} from '@/components/themed';
+
 import { type ScreenConfig } from '../navinest-hub';
 
 export type HubScreenItemProps = {
     menuExpanded?: boolean;
+    isTablet?: boolean;
     screenConfig: ScreenConfig;
 };
 
+const SCREEN_WIDTH = Dimensions.get('window').width;
+
 export const HubItemScreen = ({
     menuExpanded = false,
-    screenConfig: ScreenConfig
+    screenConfig: ScreenConfig,
+    isTablet = true
 }: HubScreenItemProps) => {
+    const drawerRef = useRef(null);
     const [open, setOpen] = React.useState(false);
+    const drawerWidth = Math.round(SCREEN_WIDTH * 0.22);
+    const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
     React.useEffect(() => {
+        console.log('isTablet', isTablet);
         setOpen(menuExpanded ?? false);
     }, [menuExpanded]);
 
-    // I AM HERE IN THIS FILE. Make ThemedIconButton that toggles drawer open/close with Pressable
-    //then render drawer content with menu items from screenConfig
+    const renderDrawer = () => (
+        <SafeAreaView style={styles.drawerContainer}>
+            <Text style={styles.drawerTitle}>My Drawer</Text>
 
-    return (
-        <Drawer
-            open={menuExpanded ?? open}
-            onOpen={() => setOpen(true)}
-            onClose={() => setOpen(false)}
-            renderDrawerContent={() => {
-                return <Text>Drawer content</Text>;
-            }}
-        >
             <TouchableOpacity
-                accessibilityLabel={open ? 'Close drawer' : 'Open drawer'}
-                onPress={() => setOpen((prevOpen) => !prevOpen)}
-                style={{
-                    // position: 'absolute',
-                    // left: 8,
-                    // top: 8,
-                    // zIndex: 20,
-                    // padding: 8,
-                    backgroundColor: '#fff',
-                    borderRadius: 6,
-                    borderWidth: 1,
-                    borderColor: 'rgba(0,0,0,0.08)'
+                style={styles.drawerItem}
+                onPress={() => {
+                    navigation.goBack();
                 }}
             >
-                <Text>{open ? '←' : '☰'}</Text>
+                <Text style={styles.drawerItemText}>Home</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.drawerItem}
+                onPress={() => {
+                    setOpen(false);
+                }}
+            >
+                <Text style={styles.drawerItemText}>Profile</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={[styles.drawerItem, styles.logout]}
+                onPress={() => {
+                    setOpen(false);
+                }}
+            >
+                <Text style={[styles.drawerItemText, { color: '#d00' }]}>
+                    Logout
+                </Text>
+            </TouchableOpacity>
+        </SafeAreaView>
+    );
+
+    return (
+        <ThemedDrawer
+            open={open}
+            onOpen={() => setOpen(true)}
+            onClose={() => setOpen(false)}
+            drawerStyle={{
+                width: drawerWidth
+                // backgroundColor: '#ff0000'
+            }}
+            drawerType={isTablet ? 'slide' : 'front'}
+            keyboardDismissMode='on-drag'
+            renderDrawerContent={renderDrawer}
+        >
+            <ThemedHeader style={styles.header}>
+                <TouchableOpacity
+                    onPress={() => setOpen(true)}
+                    style={styles.menuButton}
+                >
+                    <Text style={styles.menuText}>☰</Text>
+                </TouchableOpacity>
+                <Text style={styles.headerTitle}>Main Screen</Text>
+            </ThemedHeader>
             <ThemedScrollView>
-                <ThemedText>Hello world</ThemedText>
+                <View style={styles.content}>
+                    <Text style={styles.contentText}>
+                        This is your main screen content.
+                    </Text>
+
+                    <TouchableOpacity
+                        style={styles.primaryButton}
+                        onPress={() => alert('Primary action')}
+                    >
+                        <Text style={styles.primaryButtonText}>
+                            Primary Action
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </ThemedScrollView>
-        </Drawer>
+            <ThemedFooter style={styles.header}>
+                <TouchableOpacity
+                    onPress={() => setOpen(true)}
+                    style={styles.menuButton}
+                >
+                    <Text style={styles.menuText}>☰</Text>
+                </TouchableOpacity>
+                <Text style={styles.headerTitle}>Main Screen</Text>
+            </ThemedFooter>
+        </ThemedDrawer>
     );
 };
+
+const styles = StyleSheet.create({
+    container: { flex: 1, backgroundColor: '#fff' },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+    },
+    menuButton: { padding: 8 },
+    menuText: { fontSize: 22 },
+    headerTitle: { fontSize: 18, fontWeight: '600', marginLeft: 12 },
+
+    content: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 20
+    },
+    contentText: { fontSize: 16, marginBottom: 16 },
+    primaryButton: {
+        backgroundColor: '#007AFF',
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        borderRadius: 8
+    },
+    primaryButtonText: { color: '#fff', fontWeight: '600' },
+
+    drawerContainer: {
+        flex: 1,
+        paddingHorizontal: 16,
+        paddingTop: 20
+    },
+    drawerTitle: { fontSize: 22, fontWeight: '700', marginBottom: 20 },
+    drawerItem: { paddingVertical: 14 },
+    drawerItemText: { fontSize: 16 },
+    logout: { marginTop: 24 }
+});
