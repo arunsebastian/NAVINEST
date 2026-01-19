@@ -13,9 +13,15 @@ import {
 
 import { GestureResponderEvent, Pressable, StyleSheet } from 'react-native';
 
+import { IconSymbol } from '@/components/ui';
 import { FlatGrid } from 'react-native-super-grid';
 
 const styles = StyleSheet.create({
+    header: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 5
+    },
     gridView: {
         margin: 10,
         flex: 1,
@@ -98,8 +104,15 @@ export const Home = () => {
         }
     }, [data]);
 
+    const header = (
+        <ThemedHeader style={styles.header}>
+            <IconSymbol name='house.fill' size={32} />
+            <ThemedText type='subtitleBold'>Home</ThemedText>
+        </ThemedHeader>
+    );
+
     return (
-        <ThemedScrollView header={<ThemedHeader />} footer={<ThemedFooter />}>
+        <ThemedScrollView header={header} footer={<ThemedFooter />}>
             <FlatGrid
                 itemDimension={150}
                 data={pageTriggers}

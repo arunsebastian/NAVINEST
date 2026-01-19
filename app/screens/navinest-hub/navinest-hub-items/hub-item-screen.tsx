@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React, { useRef } from 'react';
+import React, { useEffect } from 'react';
 import {
     Dimensions,
     SafeAreaView,
@@ -14,8 +14,10 @@ import {
     ThemedDrawer,
     ThemedFooter,
     ThemedHeader,
-    ThemedScrollView
+    ThemedScrollView,
+    ThemedText
 } from '@/components/themed';
+import { IconSymbol } from '@/components/ui';
 
 import { type ScreenConfig } from '../navinest-hub';
 
@@ -29,22 +31,21 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export const HubItemScreen = ({
     menuExpanded = false,
-    screenConfig: ScreenConfig,
+    screenConfig,
     isTablet = true
 }: HubScreenItemProps) => {
-    const drawerRef = useRef(null);
     const [open, setOpen] = React.useState(false);
     const drawerWidth = Math.round(SCREEN_WIDTH * 0.22);
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
-    React.useEffect(() => {
-        console.log('isTablet', isTablet);
+    useEffect(() => {
         setOpen(menuExpanded ?? false);
     }, [menuExpanded]);
 
     const renderDrawer = () => (
         <SafeAreaView style={styles.drawerContainer}>
-            <Text style={styles.drawerTitle}>My Drawer</Text>
+            {/* I AM HERE - render the content of this panel here */}
+            <ThemedText>{screenConfig?.title}</ThemedText>
 
             <TouchableOpacity
                 style={styles.drawerItem}
@@ -84,20 +85,37 @@ export const HubItemScreen = ({
             onClose={() => setOpen(false)}
             drawerStyle={{
                 width: drawerWidth
-                // backgroundColor: '#ff0000'
             }}
             drawerType={isTablet ? 'slide' : 'front'}
             keyboardDismissMode='on-drag'
             renderDrawerContent={renderDrawer}
         >
             <ThemedHeader style={styles.header}>
+                {!open && (
+                    <TouchableOpacity
+                        onPress={() => {
+                            setOpen(true);
+                        }}
+                        style={styles.menuButton}
+                    >
+                        <IconSymbol size={30} name='menu' />
+                    </TouchableOpacity>
+                )}
                 <TouchableOpacity
-                    onPress={() => setOpen(true)}
-                    style={styles.menuButton}
+                    onPress={() => {
+                        navigation.goBack();
+                    }}
+                    style={styles.backButton}
                 >
-                    <Text style={styles.menuText}>☰</Text>
+                    <IconSymbol
+                        size={30}
+                        name='chevron.left'
+                        style={styles.backArrow}
+                    />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>Main Screen</Text>
+                <ThemedText style={styles.headerTitle}>
+                    {screenConfig?.title}
+                </ThemedText>
             </ThemedHeader>
             <ThemedScrollView>
                 <View style={styles.content}>
@@ -115,29 +133,23 @@ export const HubItemScreen = ({
                     </TouchableOpacity>
                 </View>
             </ThemedScrollView>
-            <ThemedFooter style={styles.header}>
-                <TouchableOpacity
-                    onPress={() => setOpen(true)}
-                    style={styles.menuButton}
-                >
-                    <Text style={styles.menuText}>☰</Text>
-                </TouchableOpacity>
-                <Text style={styles.headerTitle}>Main Screen</Text>
-            </ThemedFooter>
+            <ThemedFooter />
         </ThemedDrawer>
     );
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#fff' },
     header: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start'
     },
-    menuButton: { padding: 8 },
-    menuText: { fontSize: 22 },
-    headerTitle: { fontSize: 18, fontWeight: '600', marginLeft: 12 },
+    backButton: { padding: 8 },
+    backArrow: {
+        marginLeft: 5
+    },
+    headerTitle: { fontSize: 18, fontWeight: '600' },
+    menuButton: { padding: 8, marginLeft: 10 },
 
     content: {
         flex: 1,

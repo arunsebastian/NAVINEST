@@ -9,6 +9,7 @@ export type ThemedTextProps = TextProps & {
         | 'title'
         | 'defaultSemiBold'
         | 'subtitle'
+        | 'subtitleBold'
         | 'link'
         | 'error';
 };
@@ -44,6 +45,11 @@ export function ThemedText({
             fontWeight: '400',
             userSelect: 'none'
         },
+        subtitleBold: {
+            fontSize: 20,
+            fontWeight: 600,
+            userSelect: 'none'
+        },
         link: {
             lineHeight: 30,
             fontSize: 16,
@@ -63,6 +69,7 @@ export function ThemedText({
                 type === 'default' ? styles.default : undefined,
                 type === 'title' ? styles.title : undefined,
                 type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
+                type === 'subtitleBold' ? styles.subtitleBold : undefined,
                 type === 'subtitle' ? styles.subtitle : undefined,
                 type === 'link' ? styles.link : undefined,
                 type === 'error' ? styles.error : undefined,
