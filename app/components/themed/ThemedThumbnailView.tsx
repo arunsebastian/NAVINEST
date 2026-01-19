@@ -8,7 +8,7 @@ type ThemedThumbnailViewProps = ViewProps & {
 const styles = StyleSheet.create({
     view: {
         padding: 10,
-        height: 150,
+        height: 130,
         borderRadius: 8,
         cursor: 'pointer',
         display: 'flex',

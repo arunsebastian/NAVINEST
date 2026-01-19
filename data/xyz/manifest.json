@@ -22,7 +22,8 @@
         {
             "id": "arrival_and_access",
             "title": "Arrival & Access",
-            "content": "Please use the main entrance. Access code: 1234."
+            "content": "Please use the main entrance. Access code: 1234.",
+            "icon": "access.time"
         },
         {
             "id": "about_the_property",
@@ -52,7 +53,8 @@
         {
             "id": "restuarants_and_bars",
             "title": "Restaurants & Bars",
-            "content": "Recommended places include The Italian Bistro, Sushi Place, and The Local Pub."
+            "content": "Recommended places include The Italian Bistro, Sushi Place, and The Local Pub.",
+            "icon": "restaurants"
         },
         {
             "id": "offers",

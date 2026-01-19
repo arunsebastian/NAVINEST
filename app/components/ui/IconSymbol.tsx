@@ -18,12 +18,15 @@ type IconSymbolName = keyof typeof MAPPING;
  * - see SF Symbols in the [SF Symbols](https://developer.apple.com/sf-symbols/) app.
  */
 const MAPPING = {
+    default: 'browser-not-supported',
+    menu: 'menu',
+    restaurants: 'restaurant',
+    'access.time': 'access-time',
     'house.fill': 'home',
     'paperplane.fill': 'send',
     'chevron.left.forwardslash.chevron.right': 'code',
     'chevron.right': 'chevron-right',
-    'chevron.left': 'chevron-left',
-    menu: 'menu'
+    'chevron.left': 'chevron-left'
 } as IconMapping;
 
 /**
@@ -32,13 +35,13 @@ const MAPPING = {
  * Icon `name`s are based on SF Symbols and require manual mapping to Material Icons.
  */
 export function IconSymbol({
-    name,
+    name = 'default',
     size = 24,
     color,
     mode = 'default',
     style
 }: {
-    name: IconSymbolName;
+    name?: IconSymbolName;
     size?: number;
     mode?: string;
     color?: string | OpaqueColorValue;

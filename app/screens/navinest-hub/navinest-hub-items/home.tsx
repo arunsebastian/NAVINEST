@@ -1,7 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { Image } from 'react-native';
 
 import {
     ThemedFooter,
@@ -84,11 +83,12 @@ export const Home = () => {
                         id={item.id}
                         style={styles.gridItemView}
                     >
-                        <Image
+                        {/* <Image
                             source={require('@assets/images/parking.png')}
                             style={styles.imgBox}
                             resizeMode='cover'
-                        />
+                        /> */}
+                        <IconSymbol size={45} name={item?.icon} />
                         <ThemedText style={styles.itemName}>
                             {item.title}
                         </ThemedText>

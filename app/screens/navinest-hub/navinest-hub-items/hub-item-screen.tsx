@@ -23,16 +23,63 @@ import { type ScreenConfig } from '../navinest-hub';
 
 export type HubScreenItemProps = {
     menuExpanded?: boolean;
-    isTablet?: boolean;
     screenConfig: ScreenConfig;
 };
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
+const styles = StyleSheet.create({
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    leadingControls: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginLeft: 10,
+        alignItems: 'center',
+        height: '100%',
+        gap: 5
+    },
+    headerTitle: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        gap: 5,
+        marginLeft: 'auto',
+        marginRight: 'auto'
+    },
+
+    content: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 20
+    },
+    contentText: { fontSize: 16, marginBottom: 16 },
+    primaryButton: {
+        backgroundColor: '#007AFF',
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        borderRadius: 8
+    },
+    primaryButtonText: { color: '#fff', fontWeight: '600' },
+
+    drawerContainer: {
+        flex: 1,
+        paddingHorizontal: 16,
+        paddingTop: 20
+    },
+    drawerTitle: { fontSize: 22, fontWeight: '700', marginBottom: 20 },
+    drawerItem: { paddingVertical: 14 },
+    drawerItemText: { fontSize: 16 },
+    logout: { marginTop: 24 }
+});
+
 export const HubItemScreen = ({
     menuExpanded = false,
-    screenConfig,
-    isTablet = true
+    screenConfig
 }: HubScreenItemProps) => {
     const [open, setOpen] = React.useState(false);
     const drawerWidth = Math.round(SCREEN_WIDTH * 0.22);
@@ -41,6 +88,10 @@ export const HubItemScreen = ({
     useEffect(() => {
         setOpen(menuExpanded ?? false);
     }, [menuExpanded]);
+
+    useEffect(() => {
+        console.log(screenConfig);
+    }, [screenConfig]);
 
     const renderDrawer = () => (
         <SafeAreaView style={styles.drawerContainer}>
@@ -86,36 +137,35 @@ export const HubItemScreen = ({
             drawerStyle={{
                 width: drawerWidth
             }}
-            drawerType={isTablet ? 'slide' : 'front'}
+            drawerType='front'
             keyboardDismissMode='on-drag'
             renderDrawerContent={renderDrawer}
         >
             <ThemedHeader style={styles.header}>
-                {!open && (
+                <View style={styles.leadingControls}>
                     <TouchableOpacity
                         onPress={() => {
-                            setOpen(true);
+                            navigation.goBack();
                         }}
-                        style={styles.menuButton}
                     >
-                        <IconSymbol size={30} name='menu' />
+                        <IconSymbol size={30} name='chevron.left' />
                     </TouchableOpacity>
-                )}
-                <TouchableOpacity
-                    onPress={() => {
-                        navigation.goBack();
-                    }}
-                    style={styles.backButton}
-                >
-                    <IconSymbol
-                        size={30}
-                        name='chevron.left'
-                        style={styles.backArrow}
-                    />
-                </TouchableOpacity>
-                <ThemedText style={styles.headerTitle}>
-                    {screenConfig?.title}
-                </ThemedText>
+                    {!open && (
+                        <TouchableOpacity
+                            onPress={() => {
+                                setOpen(true);
+                            }}
+                        >
+                            <IconSymbol size={30} name='menu' />
+                        </TouchableOpacity>
+                    )}
+                </View>
+                <View style={styles.headerTitle}>
+                    <IconSymbol size={30} name={screenConfig?.icon} />
+                    <ThemedText type='subtitleBold'>
+                        {screenConfig?.title}
+                    </ThemedText>
+                </View>
             </ThemedHeader>
             <ThemedScrollView>
                 <View style={styles.content}>
@@ -137,42 +187,3 @@ export const HubItemScreen = ({
         </ThemedDrawer>
     );
 };
-
-const styles = StyleSheet.create({
-    header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start'
-    },
-    backButton: { padding: 8 },
-    backArrow: {
-        marginLeft: 5
-    },
-    headerTitle: { fontSize: 18, fontWeight: '600' },
-    menuButton: { padding: 8, marginLeft: 10 },
-
-    content: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20
-    },
-    contentText: { fontSize: 16, marginBottom: 16 },
-    primaryButton: {
-        backgroundColor: '#007AFF',
-        paddingHorizontal: 16,
-        paddingVertical: 12,
-        borderRadius: 8
-    },
-    primaryButtonText: { color: '#fff', fontWeight: '600' },
-
-    drawerContainer: {
-        flex: 1,
-        paddingHorizontal: 16,
-        paddingTop: 20
-    },
-    drawerTitle: { fontSize: 22, fontWeight: '700', marginBottom: 20 },
-    drawerItem: { paddingVertical: 14 },
-    drawerItemText: { fontSize: 16 },
-    logout: { marginTop: 24 }
-});
