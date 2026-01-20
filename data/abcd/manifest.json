@@ -18,13 +18,29 @@
             "id": "welcome",
             "title": "Welcome",
             "content": "Welcome to our home! We're excited to have you here.",
-            "icon":"welcome"
+            "icon":"welcome",
+            "navigateTo":["arrival_and_access","house_rules","about_the_property"],
+            "pages":[]
         },
         {
             "id": "arrival_and_access",
             "title": "Arrival & Access",
             "content": "Please use the main entrance. Access code: 1234.",
-            "icon": "access.time"
+            "icon": "access.time",
+            "pages":[
+                {
+                    "id": "check_in",
+                    "title": "Check in",
+                    "content": "Checkin Time: ",
+                    "icon":"check.in"
+                },
+                {
+                    "id": "check_out",
+                    "title": "Check out",
+                    "content": "Checkout Time: ",
+                    "icon":"check.out"
+                }
+            ]
         },
         {
             "id": "about_the_property",

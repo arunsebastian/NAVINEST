@@ -29,8 +29,6 @@ const MAPPING = {
     'access.time': 'access-time',
     'house.fill': 'home',
     'house.rules':'rule',
-    'paperplane.fill': 'send',
-    'chevron.left.forwardslash.chevron.right': 'code',
     'chevron.right': 'chevron-right',
     'chevron.left': 'chevron-left',
     'appliances':'coffee-maker',
