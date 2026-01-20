@@ -18,15 +18,25 @@ type IconSymbolName = keyof typeof MAPPING;
  * - see SF Symbols in the [SF Symbols](https://developer.apple.com/sf-symbols/) app.
  */
 const MAPPING = {
-    default: 'browser-not-supported',
-    menu: 'menu',
-    restaurants: 'restaurant',
+    'default': 'browser-not-supported',
+    'menu': 'menu',
+    'restaurants': 'restaurant',
+    'welcome':'hail',
+    'about':"info-outline",
+    'heritage':"museum",
+    'bye':"waving-hand",
+    'emergency':"contact-emergency",
     'access.time': 'access-time',
     'house.fill': 'home',
+    'house.rules':'rule',
     'paperplane.fill': 'send',
     'chevron.left.forwardslash.chevron.right': 'code',
     'chevron.right': 'chevron-right',
-    'chevron.left': 'chevron-left'
+    'chevron.left': 'chevron-left',
+    'appliances':'coffee-maker',
+    'transport':'commute',
+    'poi':'tour',
+    'offers':'local-offer'
 } as IconMapping;
 
 /**
