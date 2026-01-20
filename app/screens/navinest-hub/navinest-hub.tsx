@@ -9,6 +9,7 @@ export type ScreenConfig = {
     title: string;
     content?: string;
     icon?: string;
+    navigateTo?: Record<string, any>[];
 };
 
 const HubStack = createNativeStackNavigator();

@@ -19,6 +19,7 @@ import {
 } from '@/components/themed';
 import { IconSymbol } from '@/components/ui';
 
+import { IconButton } from '@/components/ui/IconButton';
 import { type ScreenConfig } from '../navinest-hub';
 
 export type HubScreenItemProps = {
@@ -32,12 +33,13 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        paddingLeft: 10,
+        paddingRight: 10
     },
     leadingControls: {
         display: 'flex',
         flexDirection: 'row',
-        marginLeft: 10,
         alignItems: 'center',
         height: '100%',
         gap: 5
@@ -58,13 +60,13 @@ const styles = StyleSheet.create({
         padding: 20
     },
     contentText: { fontSize: 16, marginBottom: 16 },
-    primaryButton: {
-        backgroundColor: '#007AFF',
-        paddingHorizontal: 16,
-        paddingVertical: 12,
-        borderRadius: 8
-    },
-    primaryButtonText: { color: '#fff', fontWeight: '600' },
+    // primaryButton: {
+    //     backgroundColor: '#007AFF',
+    //     paddingHorizontal: 16,
+    //     paddingVertical: 12,
+    //     borderRadius: 8
+    // },
+    // primaryButtonText: { color: '#fff', fontWeight: '600' },
 
     drawerContainer: {
         flex: 1,
@@ -143,14 +145,7 @@ export const HubItemScreen = ({
         >
             <ThemedHeader style={styles.header}>
                 <View style={styles.leadingControls}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigation.goBack();
-                        }}
-                    >
-                        <IconSymbol size={30} name='chevron.left' />
-                    </TouchableOpacity>
-                    {!open && (
+                    {(screenConfig?.navigateTo || []).length > 0 && (
                         <TouchableOpacity
                             onPress={() => {
                                 setOpen(true);
@@ -169,21 +164,28 @@ export const HubItemScreen = ({
             </ThemedHeader>
             <ThemedScrollView>
                 <View style={styles.content}>
-                    <Text style={styles.contentText}>
-                        This is your main screen content.
-                    </Text>
-
-                    <TouchableOpacity
-                        style={styles.primaryButton}
-                        onPress={() => alert('Primary action')}
-                    >
-                        <Text style={styles.primaryButtonText}>
-                            Primary Action
-                        </Text>
-                    </TouchableOpacity>
+                    <ThemedText type='subtitleBold'>
+                        {screenConfig?.content}
+                    </ThemedText>
                 </View>
             </ThemedScrollView>
-            <ThemedFooter />
+            <ThemedFooter>
+                <IconButton
+                    icon='house.fill'
+                    label='Home'
+                    buttonStyles={{
+                        textStyle: {
+                            fontSize: 20,
+                            fontWeight: 600,
+                            userSelect: 'none'
+                        },
+                        iconStyle: {
+                            size: 30
+                        }
+                    }}
+                    onPress={navigation.goBack}
+                />
+            </ThemedFooter>
         </ThemedDrawer>
     );
 };

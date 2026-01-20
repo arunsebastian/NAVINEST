@@ -13,6 +13,7 @@ export type ThemedButtonProps = PressableProps & {
     label?: string;
     img?: string;
     onPress?: () => void;
+    children: React.ReactElement[];
     style?: {
         containerStyles?: Record<string, any>;
         textStyles?: Record<string, any>;
@@ -45,6 +46,7 @@ export const ThemedButton = ({
     },
     label,
     mode = 'default',
+    children,
     ...otherProps
 }: ThemedButtonProps) => {
     const backgroundColorRef = new Animated.Value(0);
@@ -105,6 +107,7 @@ export const ThemedButton = ({
                     style.containerStyles
                 ]}
             >
+                {children}
                 <Text
                     style={[
                         { ...styles.buttonText },

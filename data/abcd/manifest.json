@@ -18,27 +18,25 @@
             "id": "welcome",
             "title": "Welcome",
             "content": "Welcome to our home! We're excited to have you here.",
-            "icon":"welcome",
-            "navigateTo":["arrival_and_access","house_rules","about_the_property"],
-            "pages":[]
+            "icon": "welcome"
         },
         {
             "id": "arrival_and_access",
             "title": "Arrival & Access",
             "content": "Please use the main entrance. Access code: 1234.",
             "icon": "access.time",
-            "pages":[
+            "navigateTo": [
                 {
                     "id": "check_in",
                     "title": "Check in",
                     "content": "Checkin Time: ",
-                    "icon":"check.in"
+                    "icon": "check.in"
                 },
                 {
                     "id": "check_out",
                     "title": "Check out",
                     "content": "Checkout Time: ",
-                    "icon":"check.out"
+                    "icon": "check.out"
                 }
             ]
         },
@@ -46,31 +44,31 @@
             "id": "about_the_property",
             "title": "About The House",
             "content": "Beautiful family home located in a quiet neighborhood with modern amenities.4 bedrooms, 2 bathrooms, built in 2020, 2500 sqft.",
-            "icon":"about"
+            "icon": "about"
         },
         {
             "id": "house_rules",
             "title": "House Rules",
             "content": "No smoking, no pets, quiet hours from 10 PM to 7 AM.",
-            "icon":"house.rules"
+            "icon": "house.rules"
         },
         {
             "id": "house_appliances",
             "title": "House Appliances",
             "content": "Washer, Dryer, Dishwasher, Microwave, Refrigerator.",
-            "icon":"appliances"
+            "icon": "appliances"
         },
         {
             "id": "getting_around",
             "title": "Getting Around",
             "content": "Public transport available nearby. Parking available on-site.",
-            "icon":"transport"
+            "icon": "transport"
         },
         {
             "id": "places_to_visit",
             "title": "Places To Visit",
             "content": "Local park, museum, shopping center, and restaurants within walking distance.",
-            "icon":"poi"
+            "icon": "poi"
         },
         {
             "id": "restuarants_and_bars",
@@ -82,25 +80,25 @@
             "id": "offers",
             "title": "Offers",
             "content": "10% off your first stay, free breakfast for bookings over 3 nights.",
-            "icon":"offers"
+            "icon": "offers"
         },
         {
             "id": "city_heritage",
             "title": "City Heritage",
             "content": "Springfield is known for its rich history and vibrant culture, with landmarks dating back to the 18th century.",
-            "icon":"heritage"
+            "icon": "heritage"
         },
         {
             "id": "before_you_leave",
             "title": "Before You Leave",
             "content": "Please ensure all lights are off, windows are closed, and keys are returned to the lockbox.",
-            "icon":"bye"
+            "icon": "bye"
         },
         {
             "id": "emergency",
             "title": "Emergency",
             "content": "In case of emergency, call 911. For non-emergencies, contact the property manager at (555) 123-4567.",
-            "icon":"emergency"
+            "icon": "emergency"
         }
     ]
 }
