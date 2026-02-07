@@ -95,9 +95,12 @@ export const HubItemScreen = ({
         console.log(screenConfig);
     }, [screenConfig]);
 
+    {
+        /* I AM HERE - Convert this component to a DrawerNavigation item */
+    }
+
     const renderDrawer = () => (
         <SafeAreaView style={styles.drawerContainer}>
-            {/* I AM HERE - render the content of this panel here */}
             <ThemedText>{screenConfig?.title}</ThemedText>
 
             <TouchableOpacity
