@@ -1,4 +1,4 @@
-import AppConfig from '@/constants/config';
+import AppConfig from '@/config';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
@@ -72,7 +72,9 @@ export const NavinestWelcome = ({
                 <ThemedView>
                     <div title={Strings.scanQRCode}>
                         <Image
-                            source={{ uri: propertyData?.barcode }}
+                            source={{
+                                uri: `${AppConfig.propertyDataPath}/${id}/images/barcode.png`
+                            }}
                             style={styles.barcode}
                             resizeMode='contain'
                         />

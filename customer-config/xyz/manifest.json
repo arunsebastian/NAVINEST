@@ -1,15 +1,15 @@
 {
-    "barcode": "http://localhost:3000/data/abcd/images/barcode.png",
+    "barcode": "barcode.png",
     "property": {
-        "id": "ABCD",
-        "name": "Sheridan Residence",
-        "address": "123 Main St, Springfield, USA",
-        "owner": "John Doe",
+        "id": "xyz",
+        "name": null,
+        "address": "27 Ede Road, Collingwood Park,QLD - 4301",
+        "owner": "Arun Sebastian",
         "propertyType": "Residential",
-        "size": "2500 sqft",
-        "bedrooms": 4,
+        "size": "1500 sqft",
+        "bedrooms": 3,
         "bathrooms": 2,
-        "yearBuilt": 2020,
+        "yearBuilt": 2005,
         "features": ["Garage", "Garden", "Swimming Pool"],
         "description": "Beautiful family home located in a quiet neighborhood with modern amenities."
     },
@@ -24,26 +24,12 @@
             "id": "arrival_and_access",
             "title": "Arrival & Access",
             "content": "Please use the main entrance. Access code: 1234.",
-            "icon": "access.time",
-            "navigateTo": [
-                {
-                    "id": "check_in",
-                    "title": "Check in",
-                    "content": "Checkin Time: ",
-                    "icon": "check.in"
-                },
-                {
-                    "id": "check_out",
-                    "title": "Check out",
-                    "content": "Checkout Time: ",
-                    "icon": "check.out"
-                }
-            ]
+            "icon": "access.time"
         },
         {
             "id": "about_the_property",
             "title": "About The House",
-            "content": "Beautiful family home located in a quiet neighborhood with modern amenities.4 bedrooms, 2 bathrooms, built in 2020, 2500 sqft.",
+            "content": "Beautiful family home located in a quiet neighborhood with modern amenities.3 bedrooms, 2 bathrooms, built in 2005, 2500 sqft.",
             "icon": "about"
         },
         {

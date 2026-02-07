@@ -1,4 +1,4 @@
-import AppConfig from '@/constants/config';
+import AppConfig from '@/config';
 
 const manifestJson = 'manifest.json';
 

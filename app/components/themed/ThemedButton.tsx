@@ -13,7 +13,7 @@ export type ThemedButtonProps = PressableProps & {
     label?: string;
     img?: string;
     onPress?: () => void;
-    children: React.ReactElement[];
+    children?: React.ReactElement[];
     style?: {
         containerStyles?: Record<string, any>;
         textStyles?: Record<string, any>;

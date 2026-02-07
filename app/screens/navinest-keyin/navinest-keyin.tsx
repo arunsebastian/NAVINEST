@@ -7,7 +7,7 @@ import {
     ThemedTextInput,
     ThemedView
 } from '@/components/themed';
-import AppConfig from '@/constants/config';
+import AppConfig from '@/config';
 import { Screens } from '@/constants/screens';
 import Strings from '@/strings';
 

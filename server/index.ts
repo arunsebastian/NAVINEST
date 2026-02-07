@@ -36,15 +36,15 @@ app.use((req, res, next) => {
     next();
 });
 
-// Example: GET /data/<property_id>/images/<image.png/jpeg> will serve the images
+// Example: GET /customer-config/<property_id>/images/<image.png/jpeg> will serve the images
 
-app.get('/data/:property_id/images/:image', (req, res) => {
+app.get('/customer-config/:property_id/images/:image', (req, res) => {
     const folder = req.params.property_id;
     const imagename = req.params.image;
     const imagePath = path.join(
         __dirname,
         '..',
-        'data',
+        'customer-config',
         folder,
         'images',
         imagename
@@ -63,14 +63,14 @@ app.get('/data/:property_id/images/:image', (req, res) => {
     });
 });
 
-// Example: GET /data/<property_id>
+// Example: GET /customer-config/<property_id>
 
-app.get('/data/:property_id/manifest.json', (req, res) => {
+app.get('/customer-config/:property_id/manifest.json', (req, res) => {
     const folder = req.params.property_id;
     const filePath = path.join(
         __dirname,
         '..',
-        'data',
+        'customer-config',
         folder,
         'manifest.json'
     );
